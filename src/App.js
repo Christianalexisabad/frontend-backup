@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import ChangePassword from './pages/changePasswordPage/ChangePassword';
+import ChangePassword from './pages/changePasswordPage/ChangePassword';
 import PrintPage from './pages/printPage/PrintPage';
 import ReportProblem from './pages/ReportProblemPage/ReportProblem';
-// import FindAccountPage from './pages/findAccountPage/FindAccount';
+import FindAccountPage from './pages/findAccountPage/FindAccount';
 import LoginPage from './pages/loginPage/LoginPage';
 import PageNotFound from './pages/pageNotFound/PageNotFound';
-// import Home from './pages/home/Home';
+import Home from './pages/home/Home';
 import'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import './App.css';
@@ -30,7 +30,7 @@ class App extends React.Component {
             <div className="App bg-white">
                 <Router>
                     <Switch>
-                        {/* <Route exact path="/pages/find account" component={FindAccountPage}/>
+                        <Route exact path="/pages/find account" component={FindAccountPage}/>
                         <Route exact path="/pages/change password/:username" component={ChangePassword}/>
                         <Route exact path='/pages/super admin dashboard/:session_id' component={Home}/>
                         <Route exact path='/pages/admin dashboard/:session_id' component={Home}/>
@@ -151,8 +151,8 @@ class App extends React.Component {
                         <Route exact path='/pages/user settings/user permissions/new/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/user permissions/:id/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/group permissions/new/:session_id' component={Home}/>
-                        <Route exact path='/pages/user settings/group permissions/:id/:session_id' component={Home}/> */}
-                        {/* <Route exact path='/pages/account/:session_id' component={Home}/> */}
+                        <Route exact path='/pages/user settings/group permissions/:id/:session_id' component={Home}/> 
+                        <Route exact path='/pages/account/:session_id' component={Home}/>
                         <Route exact path='/pages/report problem/' component={ReportProblem}/>
                         <Route exact path='/pages/print/' component={PrintPage}/>
                         <Route exact path='/page not found' component={PageNotFound}/>
