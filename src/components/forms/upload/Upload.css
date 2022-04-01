@@ -1,0 +1,13 @@
+
+
+.Upload input[type="file"]{
+  padding:0;
+  width:100px;
+  opacity:0;
+  cursor: pointer;
+  line-height: 0;
+  /* position: absolute; */
+  margin:  -5px 0 0 -100px;
+  filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+}
+

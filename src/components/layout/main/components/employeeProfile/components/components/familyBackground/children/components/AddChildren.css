@@ -1,0 +1,114 @@
+.AddChildren {
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 30px;
+    border-radius: 5px;
+    background-color: rgba(240, 240, 240);
+}
+
+.AddChildren .container {
+    width: 100%;
+    float: left;
+    padding: 15px 10px;
+    border-radius: 3px;
+    background-color: white;
+}
+
+.AddChildren .container .Title{
+    width: 100%;
+}
+
+.AddChildren .tab {  
+    margin-left: 10px;
+}
+
+.AddChildren .container .content {
+    padding: 0;
+}
+
+.AddChildren .container form {
+    width: 70%;
+    float: left;
+    padding: 10px;
+}
+
+.AddChildren .tabItem {
+    width: auto;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 3px 5px;
+    border-radius: 3px;
+    text-decoration: none;
+    display: inline-block;
+    color: rgb(50, 50, 50);
+    text-transform: capitalize;
+}
+
+.AddChildren .DialogBoxContainer {
+    padding-left: 10px;
+}
+
+.AddChildren .DialogBox p{
+    padding: 10px;
+    font-size: 12px;
+}
+
+.AddChildren form .stock-number{
+    font-size: 15px;
+    text-align: left;
+    padding-left: 10px;
+    color: rgb(100, 100, 100);
+}
+
+.AddChildren .create-employee .tabs{
+    padding: 0;
+}
+
+.AddChildren .create-employee .tabs .tab-item{
+    height: auto;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.AddChildren .create-employee .tabs .tab-item p{
+    margin: 0;
+    padding: 0 5px 0 5px;
+}
+
+.AddChildren .create-employee .tabs .tab-item:hover{
+    background-color: rgb(233, 233, 233);
+}
+
+.AddChildren form .btnContainer {
+    text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+
+    .AddChildren .container {
+        width: 100%;
+    }
+
+    .AddChildren .container form {
+        width: 60%;
+
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    .AddChildren .container form {
+        width: 100%;
+    }
+
+    .AddChildren .container form .col-lg-6:last-child button{
+        width: 48%;
+    }
+
+}
+
+
+

@@ -1,0 +1,20 @@
+.DownloadButton {
+    margin: 5px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    color: rgb(50, 180, 50);
+    background-color: rgb(230, 230, 230);
+  }
+    
+  .DownloadButton:hover {
+    box-shadow: 0 0 3px grey;
+  }
+
+  .DownloadButton:active {
+    cursor: wait;
+    background-color: rgb(210, 210, 210);
+  }

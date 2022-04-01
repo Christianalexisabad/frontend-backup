@@ -1,0 +1,22 @@
+.Benefits {
+    width: 95%;
+    margin-left: 5%;
+}
+
+.Benefits h1{
+    font-size: 20px;
+}
+
+.Benefits .sub-title{
+    font-size: 15px;
+}
+
+.Benefits table{
+    font-size: 12px;
+}
+
+.Benefits table th {
+    text-transform: capitalize;
+    border-bottom: none;
+    color: grey;
+}

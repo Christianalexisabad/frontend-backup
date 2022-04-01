@@ -1,0 +1,21 @@
+.Announcement .List{
+    width: 90%;
+    padding: 0;
+    margin-left: 5%;
+}
+
+.Announcement .List .list-item{
+    border-bottom: 1px solid grey;
+}
+
+.Announcement .List label{
+    width: 100%;
+    font-size: 12px;
+    text-align: right;
+}
+
+.Announcement .List p{
+    width: 100%;
+    font-size: 14px;
+    text-align: right;
+}

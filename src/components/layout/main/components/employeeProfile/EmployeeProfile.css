@@ -1,0 +1,89 @@
+.EmployeeProfile {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    background-color: white;
+}
+
+.EmployeeProfile .header h1 {
+    font-size: 25px;
+    width: 100%;
+}
+
+.EmployeeProfile .container{
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+.EmployeeProfile .content .tabMenu {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.EmployeeProfile .content .tabMenu .tabItem {
+    width: 100%;
+    margin: 10px 5px;
+    display: block;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 3px 5px;
+    text-decoration: none;
+    color: rgb(50, 50, 50);
+    text-transform: capitalize;
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.EmployeeProfile .content .tabMenu .tabItem:focus {
+    color: rgb(50, 150, 50);
+    background-color: rgb(220, 250, 220);
+}
+
+.EmployeeProfile .content {
+    margin: 10px;
+}
+
+.EmployeeProfile .content form{
+    padding: 0 5%;
+    border-radius: 3px;
+}
+
+.EmployeeProfile .content form h1{
+    width: auto;
+    padding: 10px 0;
+    font-size: 20px;
+    display: block;
+}
+
+.EmployeeProfile .content form .DialogBox p {
+    font-size: 16px;
+}
+
+.EmployeeProfile .content button {
+    margin: 0 3px;
+}
+
+.EmployeeProfile .content form .inputContainer {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 30%;
+    margin-top: 10px;
+}
+
+.EmployeeProfile .content form .btnContainer button {
+    width: auto;
+    display: inline-block;
+}
+
+.EmployeeProfile .content form .btnContainer {
+    text-align: right;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 576px) {
+}

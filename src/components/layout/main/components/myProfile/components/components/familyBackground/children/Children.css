@@ -1,0 +1,21 @@
+.Children {
+    width: 95%;
+    margin-left: 5%;
+}
+
+.Children h1{
+    font-size: 20px;
+}
+
+.Children table{
+    font-size: 12px;
+}
+
+.Children table th {
+    border-bottom: none;
+    color: grey;
+}
+
+.Children table td {
+    color: rgb(100, 100, 100);
+}

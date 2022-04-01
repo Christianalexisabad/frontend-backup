@@ -1,0 +1,49 @@
+
+.EmployeeFilter {
+    width: auto;
+    font-size: 15px;
+}
+.EmployeeFilter select{
+    margin: 5px;
+    border:none;
+    outline: none;  
+    cursor: pointer;
+    border-radius:3px;
+    text-transform: capitalize;
+    box-shadow: 0 0 1px rgb(50, 50, 50);
+}
+
+.EmployeeFilter input{
+    margin: 5px;
+    border:none;
+    padding: 0 5px;
+    outline: none;  
+    border-radius:3px;
+    box-shadow: 0 0 1px rgb(50, 50, 50);
+}
+
+.EmployeeFilter input[type="text"]::-webkit-input-placeholder{
+    text-transform: capitalize;
+}
+
+.EmployeeFilter input[type="date"]{
+    cursor: pointer;
+}
+
+.EmployeeFilter .from {
+    margin: 0 5px;
+}
+
+.EmployeeFilter *{
+    display: inline-block;
+}
+
+.EmployeeFilter select:hover {
+    box-shadow: 0 0 5px rgb(50,50,50)
+}
+
+.Entries select option{
+    text-transform: capitalize;
+}
+
+

@@ -1,0 +1,31 @@
+.NextButton {
+    width: auto;
+    margin: 5px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 3px;
+    background-color: rgb(50, 150, 50);
+}
+
+.NextButton:hover {
+    box-shadow: 0 0 5px rgb(160, 189, 160);
+}
+
+.NextButton:disabled {
+    background-color: rgb(50, 120, 50);
+}
+
+.NextButton:disabled:hover {
+    box-shadow: none;
+}
+
+.NextButton:active {
+    color: white;
+    background-color: green;
+}
+
+.NextButton i {
+    margin-right: 5px;
+}

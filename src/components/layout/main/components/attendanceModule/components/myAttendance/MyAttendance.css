@@ -1,0 +1,127 @@
+.MyAttendance {
+    margin: 0;
+    width: 100%;
+    padding: 10px 20px 10px 10px;
+}
+
+.MyAttendance .wrapper{
+    margin: 0 20px 20px 20px;
+}
+
+.MyAttendance .header .col-left{
+    padding: 10px;
+    text-align: left;
+}
+
+.MyAttendance .header .col-left .Title{
+    font-size: 18px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.MyAttendance .header .col-left .select{
+    width: 120px;
+    background-color:red;
+    display: inline-block;
+}
+
+.MyAttendance .header .col-right{
+    text-align: right;
+}
+
+.MyAttendance .header .col-right .SearchBar{
+    float: right;
+    margin-top: 15px;
+}
+
+.MyAttendance .header .download{
+    color: white;
+    box-shadow: 3px;
+    border-radius: 3px;
+    text-decoration: none;
+    padding: 5px 8px 5px 8px;
+    background-color: rgb(50,50,200)
+}
+
+.MyAttendance .Button:active {
+    background-color: rgb(220,220,220);
+    cursor: wait;
+}
+
+.MyAttendance .content{
+    text-align: left;
+    margin: 10px 0 10px 10px;
+}
+
+.MyAttendance .content .tableContainer{
+    overflow: auto;
+}
+
+.MyAttendance .content .table thead {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: capitalize;
+    background-color: rgb(230,230,230);
+}
+
+.MyAttendance .content .table thead .action {
+    text-align: center;
+    background-color: red;
+}
+
+.MyAttendance .content .table thead th{
+    border: none;
+    padding: 5px;
+}
+
+.MyAttendance .content .table thead th i{
+    cursor: pointer;
+    margin-left: 3px;
+    color: rgb(220,220,220);
+}
+
+.MyAttendance .content .table thead th i:hover{
+    color: rgb(100,100,100);
+}
+
+.MyAttendance .content .table thead th i:active{
+    color: rgb(20,20,20);
+}
+
+.MyAttendance .content .loading{
+    width: 100%;
+    margin-top: 2%;
+    font-size: 20px;
+    text-align: center;
+    color: rgb(100, 100, 100);
+}
+
+.MyAttendance .content .table tbody td{
+    font-size: 15px;
+    border-bottom: none;
+}
+
+.MyAttendance .content .table tbody tr:hover {
+    background-color: rgb(245,245,245);
+}
+
+.MyAttendance .footer p{
+    font-size: 12px;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .MyAttendance .content {
+        margin-left: 0;
+    }
+
+    .MyAttendance .content .tableContainer{
+        margin-left: -15px;
+    }
+    
+    .MyAttendance .content .table thead th i{
+        display: block;
+    }
+}

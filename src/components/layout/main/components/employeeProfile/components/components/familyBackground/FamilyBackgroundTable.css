@@ -1,0 +1,17 @@
+.FamilyBackgroundTable {
+    width: 95%;
+    margin-left: 5%;
+}
+
+.FamilyBackgroundTable h1{
+    font-size: 20px;
+}
+
+.FamilyBackgroundTable table{
+    font-size: 12px;
+}
+
+.FamilyBackgroundTable table th {
+    border-bottom: none;
+    color: grey;
+}

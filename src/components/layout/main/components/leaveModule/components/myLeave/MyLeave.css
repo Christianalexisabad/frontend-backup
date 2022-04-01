@@ -1,0 +1,226 @@
+.MyLeave {
+    width: 100%;
+    padding: 10px 20px 10px 10px;
+}
+
+.MyLeave .wrapper{
+    margin: 0 20px 20px 20px;
+}
+
+.MyLeave .header .col-left{
+    padding: 10px;
+    text-align: left;
+}
+
+.MyLeave .header .col-left .Title{
+    font-size: 18px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.MyLeave .header .col-left .select{
+    width: 120px;
+    background-color:red;
+    display: inline-block;
+}
+
+.MyLeave .header .col-right{
+    text-align: right;
+}
+
+.MyLeave .header .col-right .SearchBar{
+    float: right;
+    margin-top: 15px;
+}
+
+.MyLeave .header .download{
+    color: white;
+    box-shadow: 3px;
+    border-radius: 3px;
+    text-decoration: none;
+    padding: 5px 8px 5px 8px;
+    background-color: rgb(50,50,200)
+}
+
+.MyLeave .Button:active {
+    background-color: rgb(220,220,220);
+    cursor: wait;
+}
+
+.MyLeave .content{
+    text-align: left;
+    margin: 10px 0 10px 10px;
+}
+
+.MyLeave .content .tableContainer{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.MyLeave .content .table thead {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: capitalize;
+    background-color: rgb(230,230,230);
+}
+
+.MyLeave .content .table thead .action {
+    text-align: center;
+    background-color: red;
+}
+
+.MyLeave .content .table thead th{
+    border: none;
+    padding: 5px;
+}
+
+.MyLeave .content .table thead th i{
+    cursor: pointer;
+    margin-left: 3px;
+    color: rgb(220,220,220);
+}
+
+.MyLeave .content .table thead th i:hover{
+    color: rgb(100,100,100);
+}
+
+.MyLeave .content .table thead th i:active{
+    color: rgb(20,20,20);
+}
+
+.MyLeave .content .loading{
+    width: 100%;
+    margin-top: 2%;
+    font-size: 20px;
+    text-align: center;
+    color: rgb(100, 100, 100);
+}
+
+.MyLeave .content .table tbody td{
+    font-size: 15px;
+    border-bottom: none;
+}
+
+.MyLeave .content .table tbody tr:hover {
+    background-color: rgb(245,245,245);
+}
+
+.MyLeave .footer p{
+    font-size: 12px;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.MyLeave .Card{
+    height: auto;
+    margin: 10px;
+    text-align: left;
+    border-radius:5px;
+    display: inline-block;
+    box-shadow: 0 0 2px grey;
+    padding: 5px 10px 10px 20px;
+}
+
+.MyLeave .Card .fa-search:hover {
+    font-weight: bold;
+    cursor: pointer;
+    color: rgb(0, 200, 0);
+}
+
+
+.MyLeave .User{
+    width: 280px;
+}
+
+.MyLeave .Card:hover{
+    box-shadow: 0 0 5px grey;
+}
+
+.MyLeave .Card p{
+    margin: 5px;
+    font-size: 12px;
+}
+
+.MyLeave .Card p i{
+    margin-right: 5px;
+}
+
+.MyLeave .Card .row-1 .sex{
+    float: left;
+    margin-top: 10px;
+}
+
+.MyLeave .Card .row-1 .fa-edit {
+    cursor: pointer;
+}
+
+.MyLeave .Card .row-1 .fa-edit:hover {
+    color: grey;
+}
+
+.MyLeave .Card .row-1 .fa-edit:active {
+    color: black;
+}
+
+.MyLeave .Card .row-2 .imageContainer img{
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+}
+
+.MyLeave .Card .row-2 .active-status{
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 100px;
+    padding: 2px 6px 3px 6px;
+}
+
+.MyLeave .Card .row-2 .Online{
+    color: rgb(20, 150, 20);
+}
+
+.MyLeave .Card .row-2 .Offline{
+    color: rgb(200, 20, 20);
+}
+
+.MyLeave .Card .row-3 .col-lg-12{
+    margin-top: 10px;
+}
+
+.MyLeave .Card .row-3 p{
+    width: auto;
+    display: inline-block;
+}
+
+@media screen and (max-width: 768px) {
+
+    .MyLeave .content {
+        margin-left: 0;
+    }
+
+    .MyLeave .content .tableContainer{
+        margin-left: -15px;
+    }
+    
+    .MyLeave .content .table thead th i{
+        display: block;
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    .MyLeave .Card{
+        width: 92%;
+    }
+
+    .MyLeave .Card .row-2 .imageContainer {
+        text-align: center;
+    }
+
+    .MyLeave .Card .row-3 .col-lg-12{
+        margin-top: 0;
+    }
+
+}
+
+

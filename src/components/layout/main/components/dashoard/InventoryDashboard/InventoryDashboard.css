@@ -1,0 +1,72 @@
+.InventoryDashboard{
+    margin: 0;
+    /* background-color: red; */
+}
+
+.InventoryDashboard .card{
+    padding: 0;
+    width: 31%;
+    float: left;
+    height: 80px;
+    color:black;
+    box-shadow: none;
+    background: none;
+    background-color: white;
+    border-radius: 0;
+    margin: 1% 1% 1% 1%;
+    /* background: rgb(255, 255, 255); */
+}
+
+.InventoryDashboard .card ul {
+    margin: 0;
+    padding: 0;
+}
+
+.InventoryDashboard .card ul li{
+    float: left;
+    height: 100%;
+    padding: 5px 0 10px 10px;
+}
+
+.InventoryDashboard .card ul li:first-child {
+    width: 60%;
+}
+
+.InventoryDashboard .card ul li:last-child {
+    width: 40%;
+}
+
+.InventoryDashboard .card ul li p{
+    margin: 0;
+    padding: 0;
+}
+
+.InventoryDashboard .card ul li .value{
+    font-size: 30px;
+}
+
+.InventoryDashboard .card ul li .label{
+    font-size: 12px;
+    color: rgba(150, 150, 150)
+}
+
+.InventoryDashboard .card ul li i{
+    margin-top: 30px;
+    font-size: 30px;
+    margin-left: 35px;
+}
+
+@media (max-width: 768px) {
+   
+    .InventoryDashboard .card ul li i{
+        margin-top: 20px;
+        font-size: 20px;
+    }
+}    
+
+@media (max-width: 576px) {
+
+    .InventoryDashboard .card{
+        width: 47%;
+    }
+}    

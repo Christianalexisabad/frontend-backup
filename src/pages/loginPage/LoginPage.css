@@ -1,0 +1,100 @@
+.LoginPage {
+  height: 100%;
+  margin-top: 5%;
+  overflow: hidden;
+  width: 100%;
+  padding: 5% 0 0 0;
+  background-size: 100%;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-image: url("../../images/background.jpg");
+}
+
+.LoginPage .container .header {
+  color: white;
+}
+
+.LoginPage img {
+  width: 200px;
+  height: 200px;
+}
+
+.LoginPage .container .header .col-right {
+  text-align: left;
+  padding-top: 40px;
+}
+
+.LoginPage .container  form {
+  width: 25%;
+  margin-top: 5%;
+  border-radius: 3px;
+  padding: 10px 20px;
+}
+
+.LoginPage .container  form .title {
+  text-align: right;
+  padding-bottom: 10px;
+}
+
+.LoginPage .container form button{
+  margin: 5px;
+  width: 100%;
+}
+
+.LoginPage .container form .forgotPassword{
+  font-size: 12px;
+}
+
+.LoginPage .container form .forgotPassword .link{
+  color: rgb(50, 50, 50);
+}
+
+
+
+@media screen and (max-width: 1024px) {
+  
+  .LoginPage {
+    background-image: none;
+    background-color: rgb(50, 50, 50);
+  }
+
+  .LoginPage .container .header .column {
+    width: 100%;
+    text-align: center;
+  }
+
+  .LoginPage .container form {
+    float: none;
+    width: 40%;
+  }
+
+  .LoginPage .container form .title{
+    text-align: left;
+  }
+} 
+
+@media screen and (max-width: 576px) {
+
+  .LoginPage img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .LoginPage .title {
+    font-size: 25px;
+  }
+
+  .LoginPage .subTitle {
+    padding: 0 50px 0 50px;
+    font-size: 15px;
+  }
+  
+  .LoginPage .container form {
+    width: 90%;
+  }
+  
+  .LoginPage .container form .title{
+    font-size: 20px;
+  }
+}
