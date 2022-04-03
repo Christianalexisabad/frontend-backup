@@ -9,7 +9,7 @@ import CancelButton from "../../../../../../../forms/cancelButton/CancelButton";
 import Button from "../../../../../../../forms/button/Button";
 import { getEmployeeID } from "../../../../../../../../utility/Session";
 
-export default function Residential({style}){
+export default function Residential(){
 
     const HOST = getHost();
     const employee = getEmployeeID();
@@ -26,16 +26,14 @@ export default function Residential({style}){
     const [Countries, setCountries] = useState([]);
 
     const fetchData = useCallback(async () => {
-      
         try {
-            const response = await axios.get(getHost() + "/api/residential-address/get/"+ employee +"/");
+            const response = await axios.get(getHost() + "/api/residential-address/"+ employee +"/");
             const { data } = await response.data;
             setData(data);
         } catch (error) {
-            error.response.status === 404 && console.clear();    
+            // console.log(error)
         }
-    }
-    , [ employee ])
+    }, [ employee ])
 
     const fetchBarangays = async () => {
         const response = await axios.get(getHost() + "/api/barangays/");

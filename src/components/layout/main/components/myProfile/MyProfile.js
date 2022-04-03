@@ -1,9 +1,9 @@
 
-import { isPath } from "../../../../../utility/Functions";
-import React, { useState } from "react";
+import { pathContains } from "../../../../../utility/Functions";
+import React from "react";
 import Title from "../../../../forms/title/Title";
 import BasicInfo from "./components/BasicInfo";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import "./MyProfile.css";
 import WorkInfo from "./components/WorkInfo";
 import ContactInfo from "./components/ContactInfo";
@@ -14,58 +14,55 @@ import EducationalBackground from "./components/educationalBackground/Educationa
 export default function MyProfile() {
 
     const history = useHistory();
-    const display = isPath("/pages/my%20profile/");
+    const display = pathContains("/pages/my%20profile/");
+    const { session_id, tab } = useParams();
 
-    const [tab, setTab] = useState(0);
-
-    const tabItem = [
+    const tabs = [
         {
-            id: 0,
             title: "basic information",
+            component: <BasicInfo/>
         },
         {
-            id: 1,
             title: "work information",
+            component: <WorkInfo />
         },
         {
-            id: 2,
             title: "contact information",
+            component: <ContactInfo />
         },
         {
-            id: 3,
             title: "address",
+            component: <AddressInfo />
         },
         {
-            id: 4,
             title: "family background",
+            component: <FamilyBackground />
         },
         {
-            id: 5,
             title: "educational background",
+            component: <EducationalBackground />
         },
     ];
 
     function renderHeader() {
         return (
             <ul className="tabMenu">
-                {tabItem.map(item => {
+                {tabs.map((item, index) => {
                     
-                    let { id, title } = item; 
+                    const { title } = item; 
+
+                    const isTab = title === tab ? true : false;
 
                     return (
                         <li 
-                            key={id}
+                            key={index}
                             className="tabItem"
                             style={{
-                                color: id === tab ? 'rgb(50, 150, 50)' : 'rgb(50, 50, 50)',
-                                backgroundColor: id === tab? 'rgb(220, 250, 220)' : 'rgb(255, 255, 255)'
+                                color: isTab ? 'rgb(50, 150, 50)' : 'rgb(50, 50, 50)',
+                                backgroundColor: isTab ? 'rgb(220, 250, 220)' : 'rgb(255, 255, 255)'
                             }}
-                            onClick={
-                                () => {
-                                    setTab(id);
-                                }
-                            }
-                        >
+                            onClick={() => history.push("/pages/my%20profile/" + title + "/" + session_id)}
+                            >
                             <span>{title}</span>
                         </li>
                     )
@@ -96,18 +93,19 @@ export default function MyProfile() {
                                     {renderHeader()}
                                 </div>
                                 <div className="col-lg-8" style={{ overflow: 'auto' }}>
-                                    {
-                                        tab === 0 ?
-                                        <BasicInfo /> : 
-                                        tab === 1 ? 
-                                        <WorkInfo /> :
-                                        tab === 2 ? 
-                                        <ContactInfo /> : 
-                                        tab === 3 ? 
-                                        <AddressInfo /> :
-                                        tab === 4 ? 
-                                        <FamilyBackground /> : <EducationalBackground />
-                                    }
+                                    <ul className="m-0 p-0">
+                                        {tabs.map((item, index)=> {
+
+                                            const { title, component } = item;
+
+                                            return (
+                                                title === tab &&
+                                                <li key={index}>
+                                                    {component}
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
                                 </div>
                             </div>                            
                         </div>

@@ -11,6 +11,16 @@ function Button(props) {
 
         if (props.display !== undefined) {
 
+            if (!props.display) {
+                setDisplay(false);
+                return;
+            }
+
+            if (props.display) {
+                setDisplay(true);
+                return;
+            }
+
             if (permission && permission !== undefined) {
                 setDisplay(hasPermission(permission));
             }    

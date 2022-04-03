@@ -2,7 +2,7 @@ import { ADD_CITY, ADD_CIVIL_STATUS, ADD_DEPARTMENT, ADD_EMPLOYEE, ADD_EMPLOYEE_
 import { errMessage, isAddress, isBirthDate, isMiddleName, isName } from "../../../utility/Regex";
 import { createJobHistory, createUserAcitivity, getHost, updatePositionStatus } from "../../../utility/APIService";
 import { getAge, getCurrentDate, getDateTime, getEndDate} from "../../../utility/DateTime";
-import { getData, getName, isPath } from "../../../utility/Functions";
+import { getData, isPath } from "../../../utility/Functions";
 import SubmitButton from "../../forms/submitButton/SubmitButton";
 import CancelButton from "../../forms/cancelButton/CancelButton";
 import { getEmployeeID, getUserID } from "../../../utility/Session";
@@ -291,7 +291,8 @@ const AddEmployee = () => {
     }
 
     function addEmployee () {
-        axios.post(HOST + "/api/employees/new/", {
+
+        const employeeData = {
             employee_type: employee_type,
             employee_no: employee_no,
             sur_name: sur_name,
@@ -308,35 +309,49 @@ const AddEmployee = () => {
             start_date: start_date,
             end_date: end_date,
             date_hired: date_hired,
-        }).then(response => {
+        }
+
+        axios.post(HOST + "/api/employees/new/", employeeData).then(response => {
+
             const { data } = response.data;
             const employeeID = data.id;
 
-            console.log(data);
+            updatePositionStatus(position, 0);
+            
+            postUser(employeeID);
+            
+            updateEmployeeStatus(employeeID);
 
-            // updatePositionStatus(position, 0);
-            // postUser(employeeID);
-            // updateEmployeeStatus(employeeID);
-            // createEmployeeStatusHistory(employeeID);
-            // createUserAcitivity(getUserID(), "Employee", "Add Employee", "Added Employee " + data.employee_no)
+            createEmployeeStatusHistory(employeeID);
 
-            // createJobHistory({
-            //     employee: employeeID,
-            //     department: department,
-            //     position: position,
-            //     department_head_id: departmentHead,
-            //     start_date: start_date,
-            //     end_date: end_date,
-            //     created_at: currentDate,
-            //     date_hired: date_hired,
-            // })
+            createUserAcitivity(
+                getUserID(), 
+                "Employee", 
+                "Add Employee", 
+                "Added Employee " + data.employee_no
+            );
 
-            setDialogMessage(response.data.message, true)
+            createJobHistory({
+                employee: employeeID,
+                department: department,
+                position: position,
+                department_head_id: departmentHead,
+                start_date: start_date,
+                end_date: end_date,
+                created_at: currentDate,
+                date_hired: date_hired,
+            })
+
+            setDialogMessage(response.data.message, true);
+
         }).catch(error => {
-            setDialogMessage(error.response.data.message)
+
+            setDialogMessage(error.response.data.message);
+
             setTimeout(() => {
                 setMessage("");
             }, 1000)
+
         })  
     }
 

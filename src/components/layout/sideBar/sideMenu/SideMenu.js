@@ -133,7 +133,7 @@ const SideMenu = () => {
                             <span>{title}</span>
                             {item && <i className={(isActive[title] ? 'fa fa-angle-down' : toggleIcon) + " toggleIcon"}></i>}
                         </p>
-                        {isActive[title] ? renderDropdownMenu(title, item) : null}
+                        {isActive[title] && renderDropdownMenu(title, item)}
                     </li>
                 )
             })} 

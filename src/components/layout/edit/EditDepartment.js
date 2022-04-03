@@ -7,19 +7,17 @@ import Input from "../../forms/input/Input";
 import Select from "../../forms/select/Select";
 import Title from "../../forms/title/Title";
 import axios from "axios";
-
-import "./Style.css";
 import SubmitButton from "../../forms/submitButton/SubmitButton";
 import CancelButton from "../../forms/cancelButton/CancelButton";
 import { useHistory, useParams } from "react-router-dom";
 import CreateLocation from "../createForm/CreateLocation";
 import { ADD_EMPLOYEE, CREATE_LOCATION } from "../../../utility/Route";
+import "./Style.css";
 
 const EditDepartment = () => {
 
     const { id } = useParams();
     const display = pathContains("/pages/department/departments/") && id !== undefined;
-    const [deptID, setDeptID] = useState(null);
     const [data, setData] = useState({});
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
@@ -192,7 +190,6 @@ const EditDepartment = () => {
                             <div className="header text-start">
                                 <Title 
                                     onClick={() => {
-                                        setDeptID(null);
                                         history.goBack();
                                     }}
                                 />

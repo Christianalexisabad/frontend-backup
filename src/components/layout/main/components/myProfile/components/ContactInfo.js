@@ -6,10 +6,13 @@ import axios from "axios";
 import Button from "../../../../../forms/button/Button";
 import CancelButton from "../../../../../forms/cancelButton/CancelButton";
 import SubmitButton from "../../../../../forms/submitButton/SubmitButton";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getEmployeeID } from "../../../../../../utility/Session";
 
-export default function ContactInfo(props){
+export default function ContactInfo(){
+
+    const { tab } = useParams();
+    const display = tab === "contact information" ? true : false;
 
     const HOST = getHost();
     const [data, setData] = useState({});
@@ -19,14 +22,16 @@ export default function ContactInfo(props){
     const [isSuccess, setSuccess] = useState(false);
 
     const fetchData = useCallback(async () => {
-        const response = await axios.get(HOST + "/api/employees/get/" + employee + "/");
+        const response = await axios.get(HOST + "/api/employees/" + employee + "/");
         const { data } = await response.data;
         setData(data);
     }, [ HOST, employee ])
 
     useEffect(() => {
-        fetchData();
-    }, [ fetchData ])
+        if (display) {
+            fetchData();
+        }
+    }, [ display, fetchData ])
 
     const { id, mobile_no, email, tel_no } = data;
 
@@ -59,6 +64,7 @@ export default function ContactInfo(props){
     }
 
     return (
+        display &&
         <form onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col-lg-12">
@@ -66,17 +72,19 @@ export default function ContactInfo(props){
                         <span>Contact Information </span>
                         <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
                     </h1>
-                    <Button 
-                        text="edit"
-                        display={!isEditable}
-                        onClick={() => setEditable(true)} 
-                    />
+                    { !isEditable &&
+                        <Button 
+                            text="edit"
+                            display={!isSuccess}
+                            onClick={() => setEditable(true)} 
+                        />
+                    }
                     <CancelButton 
                         text="cancel" 
-                        display={isEditable}
+                        display={isEditable && !isSuccess}
                         onClick={() => {
-                            fetchData();
                             setMessage("");
+                            fetchData();
                             setEditable(false);
                         }} 
                     />

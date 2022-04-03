@@ -36,7 +36,7 @@ const ApplyLeave = () => {
     const [LeaveTypes, setLeaveTypes] = useState({});
 
     const fetchSex = useCallback(async () => {
-        let response = await axios.get(getHost() + "/api/employees/get/"+ employee +"/");
+        let response = await axios.get(getHost() + "/api/employees/"+ employee +"/");
         let { sex } = await response.data;
         fetchLeaveTypes(sex);
     }, [ employee ])

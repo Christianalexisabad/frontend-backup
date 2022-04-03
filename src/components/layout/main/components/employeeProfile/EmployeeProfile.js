@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Title from "../../../../forms/title/Title";
 import BasicInfo from "./components/BasicInfo";
 import { useHistory, useParams } from "react-router-dom";
@@ -25,47 +25,47 @@ export default function EmployeeProfile(props) {
     const tabs = [
         {
             title: "basic information", 
-            content: <BasicInfo />
+            component: <BasicInfo />
         },
         {
             title: "work information",
-            content: <WorkInfo />
+            component: <WorkInfo />
         },
         {
             title: "contact information",
-            content: <BasicInfo />
+            component: <ContactInfo />
         },
         {
             title: "address",
-            content: <BasicInfo />
+            component: <AddressInfo />
         },
         {
             title: "family background",
-            content: <BasicInfo />
+            component: <FamilyBackground />
         },
         {
             title: "educational background",
-            content: <BasicInfo />
+            component: <EducationalBackground />
         },
         {
             title: "leave",
-            content: <BasicInfo />
+            component: <Leave />
         },
         {
             title: "attendance",
-            content: <BasicInfo />
+            component: <Attendance />
         },
         {
             title: "benefits",
-            content: <BasicInfo />
+            component: <Benefits />
         },
         {
             title: "status",
-            content: <BasicInfo />
+            component: <Status />
         },
         {
             title: "user account",
-            content: <BasicInfo />
+            component: <UserProfile />
         },
     ];
 
@@ -120,10 +120,6 @@ export default function EmployeeProfile(props) {
                                     {renderHeader()}
                                 </div>
                                 <div className="col-lg-8" style={{ overflow: 'auto' }}>
-                                    <BasicInfo />
-                                    <WorkInfo />
-                                    <ContactInfo />
-                                    <AddressInfo />
                                 </div>
                             </div>                            
                         </div>

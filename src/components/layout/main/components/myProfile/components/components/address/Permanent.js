@@ -26,7 +26,7 @@ export default function Permanent({style}){
     const [Countries, setCountries] = useState([]);
 
     const fetchData = useCallback( async () => {
-        const response = await axios.get(getHost() + "/api/permanent-address/get/"+ employee +"/");
+        const response = await axios.get(getHost() + "/api/permanent-address/"+ employee +"/");
         const { data } = await response.data;
         setData(data);
     }, [ employee ])

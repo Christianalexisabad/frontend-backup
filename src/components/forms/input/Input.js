@@ -87,7 +87,7 @@ function Input (props) {
                 { value ? 
                     <span> { !disabled && message } </span> 
                     : 
-                    required && <span className="text-danger"> *Required </span> 
+                    required && !disabled && <span className="text-danger"> *Required </span> 
                 }
                 { 
                     refresh && 

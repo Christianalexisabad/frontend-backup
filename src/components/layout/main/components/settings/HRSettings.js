@@ -1,4 +1,4 @@
-import { isPath, pathContains } from "../../../../../utility/Functions";
+import { isPath } from "../../../../../utility/Functions";
 import React, { useState } from "react";
 import "./Settings.css";
 import Salary from "../table/Salary";
@@ -16,58 +16,52 @@ import Citizenship from "../table/Citizenship";
 import Province from "../table/Province";
 import GovernmentCompany from "../table/GovernmentCompany";
 import AttendanceSettings from "../table/AttendanceSettings";
-import { useHistory, useLocation, useParams } from "react-router-dom";
 
 export default function HRSettings(props) {
 
-    const display = pathContains("/pages/hr%20settings/");
-    const history = useHistory();
-    const { tab, session_id } = useParams();
-    let { pathname } = useLocation();
+    const display = isPath("/pages/hr%20settings/");
+    const [isActive, setActive] = useState({});
 
     const data = [
-        // { 
-        //     id: 'general', 
-        //     path: '/pages/hr settings/general',
-        //     title: 'General',
-        //     content: <div>
-        //         <CivilStatus />  
-        //         <hr />
-        //         <NameExtension />
-        //         <hr />
-        //         <BloodType />  
-        //         <hr />
-        //         <Citizenship />  
-        //     </div>
-        // },
-        // { 
-        //     id: 'address', 
-        //     path: '/pages/hr settings/address',
-        //     title: 'Address',
-        //     content: <div>
-        //         <Location />
-        //         <hr />
-        //         <Country />
-        //         <hr />
-        //         <Province />
-        //         <hr />
-        //         <City />
-        //         <hr />
-        //         <Barangay />
-        //     </div>
-        // },
-        // { 
-        //     id: 'workInformation', 
-        //     path: '/pages/hr settings/work information',
-        //     title: 'Work Information',
-        //     content: <div>
-        //         <EmployeeType />
-        //         <hr />
-        //         <Salary />
-        //         <hr />
-        //         <GovernmentCompany />
-        //     </div>
-        // },
+        { 
+            id: 'general', 
+            title: 'General',
+            content: <div>
+                <CivilStatus />  
+                <hr />
+                <NameExtension />
+                <hr />
+                <BloodType />  
+                <hr />
+                <Citizenship />  
+            </div>
+        },
+        { 
+            id: 'address', 
+            title: 'Address',
+            content: <div>
+                <Location />
+                <hr />
+                <Country />
+                <hr />
+                <Province />
+                <hr />
+                <City />
+                <hr />
+                <Barangay />
+            </div>
+        },
+        { 
+            id: 'workInformation', 
+            title: 'Work Information',
+            content: <div>
+                <EmployeeType />
+                <hr />
+                <Salary />
+                <hr />
+                <GovernmentCompany />
+            </div>
+        },
         { 
             id: 'leave', 
             title: 'Leave',
@@ -92,36 +86,17 @@ export default function HRSettings(props) {
             <ul className="list m-0 p-0">
                 {data.map((item, index) => {
 
-                    const { id, title } = item;
-                    const isActive = id === tab ? true : false;
+                    const active = isActive[item.id];
 
                     return (
                         <li key={index} className="listItem" >
                             <p 
-                                onClick={
-                                    e => {
-                                        e.preventDefault();
-
-                                        let path = "/pages/hr settings/" + session_id;
-                                        
-                                        if (!isActive){
-                                            path = "/pages/hr settings/" + id + "/" + session_id;
-                                        }
-
-                                        history.push(path);
-
-                                    }
-                                }
-                                style={{ 
-                                    fontWeight: isActive ? 'bold' : 'normal', 
-                                    borderBottom: isActive ? '1px solid rgb(230, 230, 230)' : 'none' 
-                                }}
-                                // (active ? "fa fa-angle-down" : "fa fa-angle-left")
-                            >
-                                <span>{title}</span>
-                                <i className={"item-toggle "}></i>
+                                onClick={()=> setActive({ ...isActive, [item.id]: active ? false : true })}
+                                style={{ fontWeight: active ? 'bold' : 'normal', borderBottom: active ? '1px solid rgb(230, 230, 230)' : 'none' }}>
+                                <span>{item.title}</span>
+                                <i className={"item-toggle " +(active ? "fa fa-angle-down" : "fa fa-angle-left")}></i>
                             </p> 
-                            {isActive && item.content}
+                            {active && item.content}
                         </li>
                     )
                 })}

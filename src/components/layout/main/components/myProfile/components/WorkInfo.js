@@ -6,8 +6,12 @@ import axios from "axios";
 import Button from "../../../../../forms/button/Button";
 import Select from "../../../../../forms/select/Select";
 import { getEmployeeID } from "../../../../../../utility/Session";
+import { useParams } from "react-router-dom";
 
 export default function WorkInfo(){
+
+    const { tab } = useParams();
+    const display = tab === "work information" ? true : false;
 
     const HOST = getHost();
     const employee = getEmployeeID();
@@ -22,7 +26,7 @@ export default function WorkInfo(){
     const [Salaries, setSalaries] = useState([]);
 
     const fetchData = useCallback(async () => {
-        const response = await axios.get(HOST + "/api/employees/get-work-info/" + employee + "/");
+        const response = await axios.get(HOST + "/api/employees/" + employee + "/work-info/");
         let { data } = await response.data;
        
         const {position } = data;
@@ -77,24 +81,22 @@ export default function WorkInfo(){
     }, [])
 
     useEffect(() => {
-        fetchDepartments();
-        fetchSalaries();
-        fetchEmployees();
-        fetchPositions();
-    }, [ fetchPositions, fetchDepartments, fetchSalaries, fetchEmployees ])
+        if (display) {
+            fetchDepartments();
+            fetchSalaries();
+            fetchEmployees();
+            fetchPositions();
+            fetchData();
+        }
+    }, [ display, fetchData, fetchPositions, fetchDepartments, fetchSalaries, fetchEmployees ])
 
-    useEffect(() => {
-        fetchData();
-    }, [ fetchData ])
-
-    const handleInputChange = (e) => {
-        e.preventDefault();
-        let { id, value } = e.target;
-        setData({ ...data, [id]: value });
+    const handleInputChange = (event) => {
+        event.preventDefault();
+        setData({ ...data, [event.target.id]: event.target.value });
     }
 
-    const handleRefresh = (e) => {
-        e.preventDefault();
+    const handleRefresh = (event) => {
+        event.preventDefault();
         fetchData();
         setMessage("");
         setSuccess(false);

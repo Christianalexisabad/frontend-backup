@@ -89,6 +89,7 @@ export default function Spouse(props){
                         onClose={() => setMessage("")}
                     />
                     <Input 
+                        required
                         label="surname"
                         type="text" 
                         id="sur_name" 
@@ -98,6 +99,7 @@ export default function Spouse(props){
                         onChange={handleInputChange} 
                     />
                     <Input 
+                        required
                         label="first name"
                         type="text" 
                         id="first_name" 

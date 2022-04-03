@@ -2,12 +2,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import Button from "../../../../../../forms/button/Button";
 import axios from "axios";
 import { getHost } from "../../../../../../../utility/APIService";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./EducationalBackground.css";
-import { ADD_EDUCATIONAL_BACKGROUND } from "../../../../../../../utility/Route";
-import { getEmployeeID, getSessionID } from "../../../../../../../utility/Session";
+import { getEmployeeID } from "../../../../../../../utility/Session";
 
-export default function EducationalBackground(props){
+export default function EducationalBackground(){
+
+    const { tab } = useParams();
+    const display = tab === "educational background" ? true : false;
 
     const HOST = getHost();
     const [data, setData] = useState([]);
@@ -42,12 +44,12 @@ export default function EducationalBackground(props){
     }
 
     return (
+        display &&
         <div className="EducationalBackground">
             <div className="row">
                 <div className="col-lg-12">
                     <h1 className="text-secondary">
                         <span>Educational Background </span>
-                        <span style={{ fontSize: "15px" }}><Link to={ADD_EDUCATIONAL_BACKGROUND + getSessionID()}>Add New</Link></span>
                         <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
                     </h1>
                 </div>

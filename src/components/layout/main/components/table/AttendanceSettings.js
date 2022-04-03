@@ -1,6 +1,6 @@
 
 import { getHost } from "../../../../../utility/APIService";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Table.css";
 import CancelButton from "../../../../forms/cancelButton/CancelButton";
@@ -45,7 +45,6 @@ export default function AttendanceSettings() {
         am_undertime, 
         pm_in, 
         pm_late,
-        pm_absent,
         pm_undertime, 
         pm_out,
         grace_before_start_time, 

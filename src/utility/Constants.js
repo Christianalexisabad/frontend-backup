@@ -57,7 +57,7 @@ export const Menu = [
         id: "can_view_my_profile",
         title: "My Profile",
         icon: "fa fa-user-circle",    
-        pathname: "/pages/my profile/",
+        pathname: "/pages/my profile/basic information/",
         item: null,
     },
     {

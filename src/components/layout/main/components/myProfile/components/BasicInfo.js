@@ -12,8 +12,12 @@ import React, { useState, useEffect, useCallback } from "react";
 // import { useParams } from "react-router-dom";
 import axios from "axios";
 import { getEmployeeID } from "../../../../../../utility/Session";
+import { useParams } from "react-router-dom";
 
-export default function BasicInfo(props){
+export default function BasicInfo(){
+
+    const { tab } = useParams();
+    const display = tab === "basic information" ? true : false;
 
     const [data, setData] = useState({});
     const employee = getEmployeeID();
@@ -24,10 +28,14 @@ export default function BasicInfo(props){
     const HOST = getHost();
 
     const fetchData = useCallback(async () => {
-        let response = await axios.get(HOST + "/api/employees/get/" + employee + "/");
-        let { data } = await response.data;
-        data['imageURL'] = HOST + data.image;
-        setData(data);
+     
+        const response = await axios.get(HOST + "/api/employees/" + employee + "/");
+        const { data } = await response.data;
+
+        let newData = data;
+        newData['imageURL'] = HOST + data.image;
+        setData(newData);
+
     }, [ HOST, employee ])
 
     const {
@@ -49,8 +57,10 @@ export default function BasicInfo(props){
     } = data;
 
     useEffect(() => {
-        fetchData();
-    }, [ fetchData ])
+        if (display) {
+            fetchData();
+        }
+    }, [ display, fetchData ])
 
     const handleInputChange = (e) => {
         let { id, type, files, value } = e.target;
@@ -142,8 +152,15 @@ export default function BasicInfo(props){
         }
     }
 
+    const styles = {
+        container: { 
+            maxHeight: window.innerHeight - (window.innerHeight * 0.25), overflow: '' 
+        }
+    }
+
     return (
-        <div className="BasicInfo" style={{ maxHeight: window.innerHeight - (window.innerHeight * 0.25), overflow: '' }}>
+        display &&
+        <div className="BasicInfo" style={styles.container}>
             <form onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col-lg-12">

@@ -8,7 +8,7 @@ import CancelButton from "../../../../../forms/cancelButton/CancelButton";
 import SubmitButton from "../../../../../forms/submitButton/SubmitButton";
 import { useParams } from "react-router-dom";
 import Select from "../../../../../forms/select/Select";
-import { Name, getData } from "../../../../../../utility/Functions";
+import { Name } from "../../../../../../utility/Functions";
 
 const initialValues = {
     id: null,
@@ -41,19 +41,22 @@ export default function WorkInfo(props){
     const fetchData = useCallback(async () => {
         
         const response = await axios.get(HOST + "/api/employees/" + employee + "/work-info/");
-        let { data } = await response.data;
+        const { data } = await response.data;
+        
         const { position } = data;
         const { department } = position;    
         const { department_head_id } = department;
 
-        data['position'] = position.id;
-        data['positionTitle'] = position.title;
-        data['payGrade'] = position.salary.pay_grade;
-        data['department'] = department.id;
-        data['departmentHead'] = department_head_id;
-        data['salary'] = position.salary.id;
+        let newData = data;
+
+        newData['position'] = position.id;
+        newData['positionTitle'] = position.title;
+        newData['payGrade'] = position.salary.pay_grade;
+        newData['department'] = department.id;
+        newData['departmentHead'] = department_head_id;
+        newData['salary'] = position.salary.id;
        
-        setData(data);
+        setData(newData);
 
     }, [ HOST, employee ])
 
@@ -70,9 +73,8 @@ export default function WorkInfo(props){
     } = data;
 
     const fetchPositions = useCallback(async () => {
-        const endpoint = HOST + "/api/positions/department=" + department + "/"
-        const response = await axios.get(endpoint)
-        let { data } = await response.data;
+        const response = await axios.get(HOST + "/api/positions/department=" + department + "/")
+        const { data } = await response.data;
         setPositions(data);
     }, [ HOST, department ])
 
@@ -115,19 +117,16 @@ export default function WorkInfo(props){
     // }, [ department, Departments, data ]);
 
     useEffect(() => {
-        fetchDepartments();
-    }, [])
-
-    useEffect(() => {
 
         if (display && !isEditable){
             fetchPositions();
             fetchSalaries();
             fetchEmployees();
+            fetchDepartments();
             fetchData();
         }
 
-    }, [ isEditable, display, fetchData, fetchSalaries, fetchEmployees, fetchPositions ])
+    }, [ isEditable, display, fetchData, fetchSalaries, fetchEmployees, fetchPositions, fetchDepartments ])
 
 
     // useEffect(() => {

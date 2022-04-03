@@ -32,29 +32,33 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/pages/find account" component={FindAccountPage}/>
                         <Route exact path="/pages/change password/:username" component={ChangePassword}/>
+                    
                         <Route exact path='/pages/super admin dashboard/:session_id' component={Home}/>
                         <Route exact path='/pages/admin dashboard/:session_id' component={Home}/>
                         <Route exact path='/pages/hr dashboard/:session_id' component={Home}/>
                         <Route exact path='/pages/employee dashboard/:session_id' component={Home}/>
                         <Route exact path='/pages/inventory dashboard/:session_id' component={Home}/>
+                  
                         <Route exact path='/pages/department/departments/:session_id' component={Home}/>
                         <Route exact path='/pages/department/departments/new/:session_id' component={Home}/>
                         <Route exact path='/pages/department/departments/:id/:session_id' component={Home}/>
+                        
                         <Route exact path='/pages/department/positions/:session_id' component={Home}/>
                         <Route exact path='/pages/department/positions/new/:session_id' component={Home}/>
                         <Route exact path='/pages/department/positions/:id/:session_id' component={Home}/>
-                        <Route exact path='/pages/my profile/:session_id' component={Home}/>
-                        <Route exact path='/pages/my profile/add child/:session_id' component={Home}/>
-                        <Route exact path='/pages/my profile/edit child/:id/:session_id' component={Home}/>
-                        <Route exact path='/pages/my profile/add educational background/:session_id' component={Home}/>
-                        <Route exact path='/pages/my profile/edit educational background/:id/:session_id' component={Home}/>
+                        
+                        <Route exact path='/pages/my profile/:tab/:session_id' component={Home}/>
+                       
                         <Route exact path='/pages/attendance/:session_id' component={Home}/>
                         <Route exact path='/pages/attendance/clock in/:session_id' component={Home}/>
+                       
                         <Route exact path='/pages/leave/:session_id' component={Home}/>
                         <Route exact path='/pages/leave/leave application/:session_id' component={Home}/>
+                     
                         <Route exact path='/pages/benefits/:session_id' component={Home}/>
                         <Route exact path='/pages/benefits/new/:session_id' component={Home}/>
                         <Route exact path='/pages/benefits/:session_id' component={Home}/>
+                     
                         <Route exact path='/pages/employee/employees/:employee/:tab/:session_id' component={Home}/>
                         <Route exact path='/pages/employee/employees/:session_id' component={Home}/>
                         <Route exact path='/pages/employee/employees/new/:session_id' component={Home}/>
@@ -65,9 +69,11 @@ class App extends React.Component {
                         <Route exact path='/pages/employee/benefits/:session_id' component={Home}/>
                         <Route exact path='/pages/employee/benefits/new/:session_id' component={Home}/>
                         <Route exact path='/pages/employee/benefits/:session_id' component={Home}/>
+                      
                         <Route exact path='/pages/users/:session_id' component={Home}/>
                         <Route exact path='/pages/users/new/:session_id' component={Home}/>
                         <Route exact path='/pages/users/profile/:username/:session_id' component={Home}/>
+                      
                         <Route exact path='/pages/inventory/office supply/:session_id' component={Home}/>
                         <Route exact path='/pages/inventory/office supply/new/:session_id' component={Home}/>
                         <Route exact path='/pages/inventory/office supply/:id/:session_id' component={Home}/>
@@ -76,13 +82,17 @@ class App extends React.Component {
                         <Route exact path='/pages/inventory/equipment/new/:session_id' component={Home}/>
                         <Route exact path='/pages/inventory/equipment/:id/:session_id' component={Home}/>
                         <Route exact path='/pages/inventory/equipment/request new/:session_id' component={Home}/>
+                        
                         <Route exact path='/pages/file/my files/:session_id' component={Home}/>
                         <Route exact path='/pages/file/department files/:session_id' component={Home}/>
+                     
                         <Route exact path='/pages/history/login history/:session_id' component={Home}/>
                         <Route exact path='/pages/history/user activities/:session_id' component={Home}/>
+                     
                         <Route exact path='/pages/reports/:session_id' component={Home}/>
                         <Route exact path='/pages/reports/generate report/:session_id' component={Home}/>
                         <Route exact path='/pages/reports/upload report/:session_id' component={Home}/>
+                     
                         <Route exact path='/pages/user settings/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/roles/new/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/roles/:id/:session_id' component={Home}/>
@@ -98,8 +108,8 @@ class App extends React.Component {
                         <Route exact path='/pages/user settings/group permissions/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/group permissions/new/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/group permissions/:id/:session_id' component={Home}/>
+
                         <Route exact path='/pages/hr settings/:session_id' component={Home}/>
-                        <Route exact path='/pages/hr settings/:tab/:session_id' component={Home}/>
                         <Route exact path='/pages/hr settings/address/locations/new/:session_id' component={Home}/>
                         <Route exact path='/pages/hr settings/address/locations/:id/:session_id' component={Home}/>
                         <Route exact path='/pages/hr settings/address/countries/new/:session_id' component={Home}/>
@@ -129,6 +139,7 @@ class App extends React.Component {
                         <Route exact path='/pages/hr settings/employee data/leave detail options/new/:session_id' component={Home}/>
                         <Route exact path='/pages/hr settings/employee data/leave detail options/:id/:session_id' component={Home}/><Route exact path='/pages/hr settings/employee data/leave balances/new/:session_id' component={Home}/>
                         <Route exact path='/pages/hr settingsemployee data/leave balances/:id/:session_id' component={Home}/>
+                     
                         <Route exact path='/pages/inventory settings/:session_id' component={Home}/>
                         <Route exact path='/pages/inventory settings/office supply/new/:session_id' component={Home}/>
                         <Route exact path='/pages/inventory settings/office supply/:id/:session_id' component={Home}/>
@@ -142,6 +153,7 @@ class App extends React.Component {
                         <Route exact path='/pages/inventory settings/equipment/types/:id/:session_id' component={Home}/>
                         <Route exact path='/pages/inventory settings/equipment/articles/new/:session_id' component={Home}/>
                         <Route exact path='/pages/inventory settings/equipment/articles/:id/:session_id' component={Home}/>
+                     
                         <Route exact path='/pages/user settings/roles/new/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/roles/:id/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/groups/new/:session_id' component={Home}/>
@@ -152,6 +164,7 @@ class App extends React.Component {
                         <Route exact path='/pages/user settings/user permissions/:id/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/group permissions/new/:session_id' component={Home}/>
                         <Route exact path='/pages/user settings/group permissions/:id/:session_id' component={Home}/> 
+                   
                         <Route exact path='/pages/account/:session_id' component={Home}/>
                         <Route exact path='/pages/report problem/' component={ReportProblem}/>
                         <Route exact path='/pages/print/' component={PrintPage}/>

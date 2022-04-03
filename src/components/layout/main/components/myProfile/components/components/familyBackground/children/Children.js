@@ -2,10 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import Button from "../../../../../../../../forms/button/Button";
 import { getHost } from "../../../../../../../../../utility/APIService";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./Children.css";
-import { getSessionID } from "../../../../../../../../../utility/Session";
-import { ADD_CHILD, EDIT_CHILD } from "../../../../../../../../../utility/Route";
+import { EDIT_CHILD } from "../../../../../../../../../utility/Route";
 import EditButton from "../../../../../../../../forms/editButton/EditButton";
 
 export default function Children(props){
@@ -51,10 +50,10 @@ export default function Children(props){
             <div className="row">
                 <div className="col-lg-12">
                     <h1 className="text-secondary">
-                        <span>Children </span>    
-                        <span style={{ fontSize: "15px" }}><Link to={ADD_CHILD + getSessionID()}>Add New</Link></span>
+                        <span>Children</span>    
                         <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
                     </h1>
+                    <Button text="Add New" onClick={()=>fetchData()}/>
                 </div>
             </div>
             <div className="row">

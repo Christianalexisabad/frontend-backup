@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getDateTime } from './DateTime';
 
-export const HOST = 'http://localhost:8000';
-// export const HOST = 'http://ecandoni.com:8000';
+// export const HOST = 'http://localhost:8000';
+export const HOST = 'http://ecandoni.com:8000';
 
 export const RETRIEVE_USER = HOST + "/api/users/";
 
