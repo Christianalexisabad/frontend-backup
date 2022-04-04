@@ -125,8 +125,7 @@ export function getTimeDifference(time1, time2) {
 export function getAge(dob) { 
     var diff_ms = new Date() - new Date(dob).getTime();
     var age_dt = new Date(diff_ms); 
-  
-    return Math.abs(age_dt.getUTCFullYear() - 1970);
+    return parseInt(Math.abs(age_dt.getUTCFullYear() - 1970));
 }
 
 export function getReducedDate(date, days) { 

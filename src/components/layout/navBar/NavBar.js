@@ -8,7 +8,7 @@ const NavBar = (props) => {
         <nav className="NavBar">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-lg-2 col-md-3 col-sm-4 navBarBrand">
+                    <div className="col-lg-2 col-md-3 col-sm-4 navBarBrand m-0">
                         <Link style={{ color: 'rgb(40, 135, 45)' }} to="/">
                             e-Candoni
                         </Link>

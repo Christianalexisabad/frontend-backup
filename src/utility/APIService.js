@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getDateTime } from './DateTime';
 
-// export const HOST = 'http://localhost:8000';
-export const HOST = 'http://ecandoni.com:8000';
+export const HOST = 'http://localhost:8000';
+//export const HOST = 'http://ecandoni.com:8000';
 
 export const RETRIEVE_USER = HOST + "/api/users/";
 
@@ -54,7 +54,7 @@ export const validateEmail = async(email) => {
     return response.status === 200 ? true : false;
 }
 
-export function updatePositionStatus(position, status) {
+export function updateJobStatus(position, status) {
     axios.patch(HOST + "/api/positions/update/" + position + "/", {
         is_vacant: status,
     }).then(res => {  

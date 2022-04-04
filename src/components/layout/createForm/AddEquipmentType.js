@@ -1,12 +1,11 @@
-import ImageUploader from "../../forms/imageUploader/ImageUploader";
-import { isEmail, isTelNo, isName, hasIllegalCharacters, isDecimal } from "../../../utility/Regex";
+import { hasIllegalCharacters } from "../../../utility/Regex";
 import CancelButton from "../../forms/cancelButton/CancelButton";
 import SubmitButton from "../../forms/submitButton/SubmitButton";
-import { getDateTime, isPath, Name } from "../../../utility/Functions";
+import { isPath } from "../../../utility/Functions";
 import DialogBox from "../../forms/dialogBox/DialogBox";
 import { getHost } from "../../../utility/APIService";
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Input from "../../forms/input/Input";
 import Title from "../../forms/title/Title";
 import axios from "axios";

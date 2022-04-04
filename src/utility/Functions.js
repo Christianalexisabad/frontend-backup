@@ -44,6 +44,7 @@ export function setUserID (id) {
     localStorage.setItem('userID', id)
 }
 
+
 export function setModule (module) {
     localStorage.setItem('module', has(module, ' Manager') ? remove(module, ' Manager') : module);
 }
@@ -189,9 +190,44 @@ export function clean (str) {
     return str;
 }
 
+export function hasError(object) {
+
+    try {
+        for(const item in object) {
+            if (object[item]) {
+                return true;
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        return false;       
+    }
+    return false;
+}
+
+export function hasChanges(object) {
+
+    try {
+        for(const item in object) {
+            if (object[item]) {
+                return true;
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        return false;       
+    }
+    return false;
+}
 
 export function removeLastChar (str) {
-    return str.substr(0, str.length - 1)
+    try {
+        let length = str.length;
+        let lastChar = str.substr(length-1, length);
+        return str.replace(lastChar, '');
+    } catch (error) {
+        return str;        
+    }
 }
 
 export function spaceToUnderscore (str) {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { errMessage } from '../../../utility/Regex';
 import './Input.css';
 
 const initialStyles = {
@@ -21,12 +20,10 @@ function Input (props) {
         name,
         placeholder,
         label,
-        isValid,
-        required,
+        errMessage,
         disabled,
         value,
         type,
-        validate,
         refresh,
         dark,
         onChange,
@@ -34,8 +31,6 @@ function Input (props) {
     } = props;
 
     const display = props.display === undefined ? true : props.display;
-
-    const [message, setMessage] = useState("");
     const [styles, setStyles] = useState(initialStyles);
 
     useEffect(() => {
@@ -65,29 +60,17 @@ function Input (props) {
             });
         } 
 
-        if (value) {
-            
-            if (validate && !isValid) {
-                setMessage(errMessage[id]);
-                return false;
-            }
-
-            setMessage(<i className="fa fa-check-circle text-success"></i>);
-
-        }
-
-    }, [ id, disabled, value, isValid, required, validate, dark ]);
-
+    }, [ id, disabled, value, dark ]);
 
     return (
         display &&
         <div className="input" style={styles.inputContainer}>
             <label style={styles.label}>
                 { label }
-                { value ? 
-                    <span> { !disabled && message } </span> 
+                { errMessage ? 
+                    <span className="text-danger">{ " *" + errMessage }</span> 
                     : 
-                    required && !disabled && <span className="text-danger"> *Required </span> 
+                    value && <i className="fa fa-check-circle text-success"></i> 
                 }
                 { 
                     refresh && 

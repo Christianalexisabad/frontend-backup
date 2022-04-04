@@ -5,7 +5,15 @@ import './Select.css';
 
 const Select = (props) => {
 
-    const [style, setStyle] = useState({});
+    const [styles, setStyle] = useState({
+        container: {},
+        button: { 
+            color: 'blue' 
+        },
+        errMessage: {
+            fontSize: '12px'
+        }
+    });
 
     const {
         id,
@@ -13,7 +21,7 @@ const Select = (props) => {
         refresh,
         disabled,
         value,
-        required,
+        errMessage,
         create,
         createText,
         onChange,
@@ -40,28 +48,36 @@ const Select = (props) => {
     }
 
     useEffect(() => {
-        setStyle(
-            disabled || !value ? {
-                borderBottom: '1px solid rgb(230, 230, 230)',
-            } : {
-                borderBottom: '1px solid rgb(100, 250, 100)',
-            }
-        )
-    }, [ disabled, value ]);
+
+        if (disabled || !value) {
+            setStyle({ ...styles, 
+                container: {
+                    borderBottom: '1px solid rgb(230, 230, 230)',
+                }
+            })
+        } else {
+            setStyle({ ...styles, 
+                container: {
+                    borderBottom: '1px solid rgb(100, 250, 100)',
+                }
+            })
+        }
+
+    }, [ disabled, value, styles ]);
 
     return (
-        <div className="select" style={ style }>
+        <div className="select" style={styles.container}>
             <label>
                 <span> { label } </span>
-                { !disabled && required && 
-                    !value ? 
-                    <span className="text-danger message"> *Required</span> : 
-                    value && !disabled ? <i className="fa fa-check-circle text-success" /> : ""
+                { errMessage ? 
+                    <span className="text-danger" style={styles.errMessage}>{ " *" + errMessage }</span> 
+                    : 
+                    value && <i className="fa fa-check-circle text-success"></i> 
                 }
                 { onClick ? 
                     <button 
                         type="button" 
-                        style={{ color: 'blue' }} 
+                        style={styles.button} 
                         onClick={ onClick }>{ createText }
                     </button> : <Link 
                         className="link" to={ create + getSessionID() }>

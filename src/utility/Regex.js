@@ -38,19 +38,11 @@ export const isEmail = (value) => {
     return new RegExp("^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$").test(value)
 }
 
-
-export const isEmployeeNo = (value) => { 
+export const isValidEmployeeNo = (value) => { 
     if (!value) {
         return true;
     } else {
-        if (new RegExp('^[0-9]+-[0-9]+$').test(value)) {
-            axios.get(getHost() + '/api/employees/validate-employee-no/' + value + "/")
-            .then(response => {
-                return true;
-            }).catch(error => {
-                return 'c';
-            })
-        }
+        return new RegExp('^[0-9]+-[0-9]+$').test(value)
     }
 }
 
@@ -82,7 +74,8 @@ export const isUsername = (value) => {
 }
 
 export const isPassword = (value) => { 
-    return new RegExp("^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]+$").test(value)
+    // Must at least eight characters, one special character and one number
+    return new RegExp("^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$").test(value)
 }
 
 export const isWeight = (value) => { 
