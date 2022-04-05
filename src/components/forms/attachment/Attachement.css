@@ -1,0 +1,64 @@
+.Attachement{
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+  text-align: left;
+  color: rgb(122, 124, 122);
+}
+
+.Attachement label {
+  width: 100%;
+  text-align: left;
+}
+
+.Attachement img {
+  display: block;
+}
+
+.Attachement button {
+  margin: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  background-color: rgb(240, 240, 240);
+}
+
+.Attachement button:active {
+  background-color: rgb(210, 210, 210);
+}
+
+.Attachement button:disabled:active {
+  background-color: rgb(240, 240, 240);
+  }
+
+.Attachement button i{
+  cursor: pointer;
+}
+
+.Attachement input[type="file"] {
+  width: 30px;
+  opacity:0; 
+  height: 30px;
+  cursor: pointer;
+  position: absolute;
+  line-height: 0;
+  margin:  -5px 0 0 -10px;
+  filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+}
+
+.Attachement input[type="text"] {
+  border: none;
+  max-width: 70%;
+  outline: none;
+}
+
+.Attachement input[type="text"]::placeholder {
+  text-transform: none;
+}
+
+
+
+

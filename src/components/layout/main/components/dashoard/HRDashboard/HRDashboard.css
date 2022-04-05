@@ -1,0 +1,76 @@
+.HRDashboard{
+    margin: 0;
+    /* background-color: red; */
+}
+
+.HRDashboard .row{
+    padding-left: 10px;
+}
+
+.HRDashboard .card{
+    padding: 0;
+    width: 31%;
+    float: left;
+    height: 80px;
+    color:black;
+    box-shadow: none;
+    background: none;
+    background-color: white;
+    border-radius: 0;
+    margin: 1% 1% 1% 1%;
+    /* background: rgb(255, 255, 255); */
+}
+
+.HRDashboard .card ul {
+    margin: 0;
+    padding: 0;
+}
+
+.HRDashboard .card ul li{
+    float: left;
+    height: 100%;
+    padding: 5px 0 10px 10px;
+}
+
+.HRDashboard .card ul li:first-child {
+    width: 60%;
+}
+
+.HRDashboard .card ul li:last-child {
+    width: 40%;
+}
+
+.HRDashboard .card ul li p{
+    margin: 0;
+    padding: 0;
+}
+
+.HRDashboard .card ul li .value{
+    font-size: 30px;
+}
+
+.HRDashboard .card ul li .label{
+    font-size: 12px;
+    color: rgba(150, 150, 150)
+}
+
+.HRDashboard .card ul li i{
+    margin-top: 30px;
+    font-size: 30px;
+    margin-left: 35px;
+}
+
+@media (max-width: 768px) {
+   
+    .HRDashboard .card ul li i{
+        margin-top: 20px;
+        font-size: 20px;
+    }
+}    
+
+@media (max-width: 576px) {
+
+    .HRDashboard .card{
+        width: 47%;
+    }
+}    

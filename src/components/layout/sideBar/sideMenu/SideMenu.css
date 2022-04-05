@@ -1,0 +1,85 @@
+.SideMenu ul {
+  margin: 0 0 0 0;
+  padding: 30px 0 0 0;
+}
+
+.SideMenu .sideItem {
+  padding: 5px 10px 5px 10px;
+}
+
+.SideMenu .sideItem p{
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.SideMenu .sideItem .title{
+  padding: 3px 3px 3px 10px;
+}
+
+.SideMenu .sideItem .title:hover{
+  background-color: rgb(220, 220, 220);
+}
+
+.SideMenu .sideItem .title .icon{
+  margin-right:15px;
+}
+
+.SideMenu .sideItem .title .toggleIcon{
+  float: right;
+  margin-top: 3px;
+  margin-right: 5px;
+}
+
+.SideMenu .sideItem .dropdownMenu {
+  padding: 0;
+  margin-top: 5px;
+  border-radius: 3px;
+  background-color: rgb(245, 245, 245);
+}
+
+.SideMenu .sideItem .dropdownMenu .dropdownItem{
+  display: block;
+  font-size: 15px;
+  padding-left: 45px;
+  text-decoration: none;
+  color: rgb(50, 50, 50);
+  text-transform: capitalize;
+}
+
+.SideMenu .sideItem .dropdownMenu .dropdownItem:focus {
+  border-radius: 3px;
+  font-weight: bold;
+  color: rgb(50, 150, 50);
+  background-color: rgb(230, 230, 230);
+}
+
+.SideMenu .sideItem .dropdownMenu p:hover{
+  background-color: rgb(160, 230, 160);
+}
+
+@media screen and (max-width: 1024px) {
+  
+  .SideMenu .sideItem p{
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  
+  .SideMenu {
+    right: 0;
+    width: 90%;
+    box-shadow: 0 0 5px grey;
+    background-color: white;
+    position: absolute;
+  }
+
+  .SideMenu .sideItem .dropdownMenu .dropdownItem{
+    font-size: 15px;
+  }
+}
+

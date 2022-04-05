@@ -1,0 +1,42 @@
+.SearchBar{
+    padding: 0;
+    width: 400px;
+    text-align: left;
+    border-radius: 100px;
+    box-shadow: 0 0 1px black;
+    background-color: rgb(254, 254, 254);
+}
+
+.SearchBar input{
+    width: auto;
+    border: none;
+    outline: none;
+    background: none;
+    padding-left: 10px;
+}
+
+.SearchBar ::placeholder{
+    text-transform: capitalize;
+}
+
+.SearchBar .fa {
+    float: right;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-right: 12px;
+}
+.SearchBar .fa:hover {
+    color: rgb(200,50,50);
+}
+
+@media screen and (max-width: 992px) {
+    .SearchBar {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .SearchBar {
+        width: 100%;
+    }
+}

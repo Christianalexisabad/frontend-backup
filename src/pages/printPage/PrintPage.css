@@ -1,0 +1,63 @@
+.PrintPage {
+  margin: 0;
+  width: 100%;
+  height: 112vh;
+  overflow: hidden;
+  padding: 5% 0 0 0;
+}
+
+.PrintPage .container{
+  width: 100%;
+  margin-top: 5%;
+  border-radius: 5px;
+  padding: 10px 30px 30px 30px;
+}
+
+.PrintPage .container .content {
+  padding: 3% 5%;
+}
+
+@page { size: auto; margin: 0mm; padding: 0mm; }
+
+.PrintPage h1 {
+  text-transform: capitalize;
+  font-size: 25px;
+  text-align: left;
+  padding: 10px 0 10px 0;
+}
+
+.PrintPage ul li * {
+  font-size: 13px;
+}
+
+.PrintPage table {
+  font-size: 12px;
+}
+
+.PrintPage table th {
+  text-transform: none;
+}
+
+@media screen and (max-width: 1024px) {
+  
+  .PrintPage {
+    margin-top: 2%;
+    background-image: none;
+    background-color: white;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .PrintPage .container{
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  
+  .PrintPage .container{
+    width: 90%;
+  }
+}
+

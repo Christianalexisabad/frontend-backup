@@ -1,0 +1,24 @@
+.DialogBox p {
+    width: 100%;
+    text-align: left;
+    font-size: 13px;
+    margin: 10px 0;
+    border-radius: 3px;
+    padding: 5px 5px 5px 10px;
+}
+
+.DialogBox .fa-times{
+    cursor: pointer;
+    float: right;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+.DialogBox .failed{
+    background-color: rgb(250, 50,50);
+}
+
+.DialogBox .success{
+    background-color: rgb(50, 180, 50);
+}
+

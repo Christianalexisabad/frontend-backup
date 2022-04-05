@@ -1,0 +1,17 @@
+.EducationalBackground {
+    width: 95%;
+    margin-left: 5%;
+}
+
+.EducationalBackground h1{
+    font-size: 20px;
+}
+
+.EducationalBackground table{
+    font-size: 12px;
+}
+
+.EducationalBackground table th {
+    border-bottom: none;
+    color: grey;
+}

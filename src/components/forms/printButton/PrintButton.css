@@ -1,0 +1,23 @@
+.PrintButton {
+    font-size: 12px;
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgba(50, 50, 250);
+    background-color: rgba(240, 240, 250);
+}
+
+.PrintButton:hover {
+    color: rgb(50, 50, 150);
+    box-shadow: 0 0 3px rgb(50, 50, 150);
+}
+
+.PrintButton i {
+    margin-right: 5px;
+}
+
+.PrintButton:active {
+    color: rgba(50, 50, 250);
+    background-color: rgb(220, 220, 220);
+}

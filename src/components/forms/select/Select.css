@@ -1,0 +1,73 @@
+.select{
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+    text-align: left;
+    color: rgb(122, 124, 122);
+}
+
+.select select{
+    cursor: pointer;
+    width: 100%;
+    border:none;
+    outline: none;
+    box-shadow: none;
+}
+
+.select select:disabled{
+    appearance: none;
+    padding-left: 4px;
+}
+
+.select label {
+    width: auto;
+    font-size: 15px;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+.select .link {
+    margin-left: 10px;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.select .fa-refresh,
+.select button {
+    background: none;
+    font-size: 10px;
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+.select .fa-refresh:active,
+.select button {
+        cursor: wait;
+}
+
+.select .fa-refresh:hover,
+.select button {
+    color: black;
+}    
+
+.select .link {
+    margin: 0 3px;
+}
+
+
+.select .link:hover {
+    text-decoration: underline;
+}
+
+.select .message {
+    font-size: 12px;
+}
+
+.select .fa-check-circle {
+    font-size: 12px;
+    margin: 0 3px;
+}
+
+
+
+

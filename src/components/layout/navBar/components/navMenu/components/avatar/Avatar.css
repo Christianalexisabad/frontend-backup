@@ -1,0 +1,47 @@
+.Avatar {
+    width: 100%;
+    height: 100%;
+}
+
+.Avatar img{
+    margin-right: 5px;
+    border-radius: 100%;
+}
+
+.Avatar img:hover{
+    box-shadow: 0 0 5px black;
+}
+
+.Avatar img:active{
+    box-shadow: 0 0 3px black;
+}
+
+.Avatar .fa-caret-down:active{
+    color: grey;
+}
+
+.Avatar .avatar-menu{
+    top: 10;
+    padding: 0;
+    width: 145px;
+    display: none;
+    border-radius: 5px;
+    position: absolute;
+    margin: 0 0 0 -110px;
+    background-color: white;
+    box-shadow: 0 1px 1px rgb(59, 58, 58);
+}
+
+.Avatar .avatar-menu .avatar-item {
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    font-size: 12px;
+    padding: 0px 10px 0px 20px;
+    text-transform: capitalize;
+}
+
+.Avatar .avatar-menu .avatar-item:hover {
+    text-decoration: underline;
+    background-color: rgb(240, 240, 240);
+}

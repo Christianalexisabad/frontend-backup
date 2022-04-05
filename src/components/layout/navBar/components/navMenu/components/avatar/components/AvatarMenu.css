@@ -1,0 +1,35 @@
+.AvatarMenu {
+    z-index: 1;
+    width: 180px;
+    border-radius: 3px;
+    position: absolute;
+    text-align: center;
+    margin: 5px 0 0 -150px;
+    box-shadow: 0 0 5px grey;
+}
+
+.AvatarMenu img {
+    margin-left: 25px;
+    margin-top: 15px;
+}
+
+.AvatarMenu ul{
+    padding: 10px;
+    cursor: pointer;
+    text-align: right;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.AvatarMenu li p {
+    text-decoration: none;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 3px;
+    margin: 0;
+}
+
+.AvatarMenu li p:hover {
+    font-weight: bold;
+    color: rgb(50,50,150)
+}

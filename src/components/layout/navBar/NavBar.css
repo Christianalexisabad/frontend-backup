@@ -1,0 +1,67 @@
+.NavBar *{
+  padding: 0;
+}
+
+.NavBar{
+  width: 100%;
+  padding: 0;
+  height: 50px;
+  background: none;
+}
+
+.NavBar .container-fluid {
+  padding: 0;
+}
+
+.NavBar .container-fluid .navBarBrand {
+  visibility: hidden;
+}
+
+.NavBar .container-fluid .navBarBrand .list .listItem{
+  display: inline-block;
+}
+
+.NavBar .container-fluid .navBarBrand .list .listItem:last-child{
+  padding-left: 10px;
+}
+
+.NavBar .container-fluid .navMenuContainer {
+  padding-top: 10px;
+}
+
+@media screen and (max-width: 992px) {
+
+  .NavBar .container-fluid .navBarBrand{
+    padding: 1% 0 0 4%;
+    text-align: left;
+    visibility: visible;
+  }
+
+  .NavBar .container-fluid .navBarBrand *{
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .NavBar .container-fluid .navBarBrand{
+    padding: 1% 0 0 5%;
+    text-align: left;
+    visibility: visible;
+  }
+}
+
+@media screen and (max-width: 576px) {
+
+  .NavBar .container-fluid .navBarBrand {
+    margin: 0;
+    padding: 2% 0 0 5%;
+    text-align: center;  
+  }
+  
+  .NavBar .container-fluid .navBarBrand *{
+    font-size: 25px;
+  }
+}

@@ -1,0 +1,22 @@
+.CustomLink {
+    font-size: 15px;
+    border-radius: 3px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 3px 5px 3px 5px;
+    color: rgb(50, 150, 50);
+    background-color: rgb(220, 250, 220);
+}
+
+.CustomLink:hover {
+    box-shadow: 0 0 3px green;
+}
+
+.CustomLink:active {
+    color: white;
+    background-color: green;
+}
+
+.CustomLink i {
+    margin-right: 5px;
+}
