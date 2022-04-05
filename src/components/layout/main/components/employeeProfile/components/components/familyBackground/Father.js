@@ -9,6 +9,7 @@ import { getHost } from "../../../../../../../../utility/APIService";
 import { ADD_NAME_EXTENSION } from "../../../../../../../../utility/Route";
 import { useParams } from "react-router-dom";
 import DialogBox from "../../../../../../../forms/dialogBox/DialogBox";
+import { isDataChanged } from "../../../../../../../../utility/Functions";
 
 export default function Father(props){
 
@@ -18,6 +19,7 @@ export default function Father(props){
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [data, setData] = useState([]);
+    const [initialData, setInitialData] = useState({});
     
     const [NameExtensions, setNameExtensions] = useState([]);
 
@@ -25,6 +27,7 @@ export default function Father(props){
         const response = await axios.get(HOST + "/api/fathers/get/"+ employee +"/");
         const { data } = await response.data;
         setData(data);
+        setInitialData(data);
     }, [ HOST, employee ])
 
     const fetchNameExtensions = useCallback(async () => {
@@ -97,6 +100,15 @@ export default function Father(props){
         }
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        if (!isDataChanged(initialData, data)) {
+            setMessage("");
+            setEditable(false);
+        }
+        setData(initialData);
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="row">
@@ -114,11 +126,7 @@ export default function Father(props){
                     <CancelButton 
                         text="cancel" 
                         display={isEditable}
-                        onClick={() => {
-                            fetchData();
-                            setMessage("");
-                            setEditable(false);
-                        }} 
+                        onClick={handleCancel}
                     />
                     <SubmitButton 
                         text={isSuccess ? "Ok" : "Save"}

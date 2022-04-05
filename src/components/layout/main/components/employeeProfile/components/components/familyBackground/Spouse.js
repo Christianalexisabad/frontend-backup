@@ -9,6 +9,7 @@ import { getHost } from "../../../../../../../../utility/APIService";
 import { ADD_NAME_EXTENSION } from "../../../../../../../../utility/Route";
 import { useParams } from "react-router-dom";
 import DialogBox from "../../../../../../../forms/dialogBox/DialogBox";
+import { isDataChanged } from "../../../../../../../../utility/Functions";
 
 export default function Spouse(props){
 
@@ -17,7 +18,8 @@ export default function Spouse(props){
     const [isEditable, setEditable] = useState(false);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
     
     const [NameExtensions, setNameExtensions] = useState([]);
 
@@ -25,6 +27,7 @@ export default function Spouse(props){
         const response = await axios.get(HOST + "/api/spouses/get/"+ employee +"/");
         const { data } = await response.data;
         setData(data);
+        setInitialData(data);
     }, [ HOST, employee ])
 
     const fetchNameExtensions = useCallback(async () => {
@@ -109,6 +112,15 @@ export default function Spouse(props){
         }
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        if (!isDataChanged(initialData, data)) {
+            setMessage("");
+            setEditable(false);
+        }
+        setData(initialData);
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="row">
@@ -126,11 +138,7 @@ export default function Spouse(props){
                     <CancelButton 
                         text="cancel" 
                         display={isEditable}
-                        onClick={() => {
-                            fetchData();
-                            setMessage("");
-                            setEditable(false);
-                        }} 
+                        onClick={handleCancel}
                     />
                     <SubmitButton 
                         text={isSuccess ? "Ok" : "Save"}

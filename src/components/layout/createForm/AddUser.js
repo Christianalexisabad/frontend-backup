@@ -19,7 +19,7 @@ const AddUser = () => {
 
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         employee: null,
         role: null,
         user_type: null,
@@ -29,7 +29,7 @@ const AddUser = () => {
         username: ""
     };
 
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [Employees, setEmployees] = useState([]);
@@ -132,7 +132,7 @@ const AddUser = () => {
     }, [employee]);
 
     function clearData () {
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
         setMessage("");
     }   
@@ -211,7 +211,7 @@ const AddUser = () => {
                                     text="Add New User"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -301,7 +301,7 @@ const AddUser = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text={isSuccess ? "New" : "Save"} /> 

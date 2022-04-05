@@ -33,7 +33,7 @@ export default function EmployeeBenefit() {
         setData(data);
     }, [ HOST, path ]);
 
-    const initialValues = {
+    const initialData = {
         filterValue: null, 
         department: null, 
         employee: null,  
@@ -41,7 +41,7 @@ export default function EmployeeBenefit() {
         endDate: "",
     }   
 
-    const [filterData, setFilterData] = useState(initialValues);
+    const [filterData, setFilterData] = useState(initialData);
     
     const handleFilterChange = (e) => {
         e.preventDefault();
@@ -154,7 +154,7 @@ export default function EmployeeBenefit() {
                         <BenefitFilter 
                             data={filterData}
                             onChange={handleFilterChange}
-                            onCancel={()=> setFilterData(initialValues)}                                
+                            onCancel={()=> setFilterData(initialData)}                                
                         />
                     </div>
                 </div>

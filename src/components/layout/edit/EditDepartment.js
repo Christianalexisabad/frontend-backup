@@ -1,5 +1,5 @@
 import ImageUploader from "../../forms/imageUploader/ImageUploader";
-import { getLocation, Name, pathContains } from "../../../utility/Functions";
+import { getLocation, isDataChanged, Name, pathContains } from "../../../utility/Functions";
 import DialogBox from "../../forms/dialogBox/DialogBox";
 import { getHost } from "../../../utility/APIService";
 import React, { useCallback, useEffect, useState } from "react";
@@ -13,12 +13,14 @@ import { useHistory, useParams } from "react-router-dom";
 import CreateLocation from "../createForm/CreateLocation";
 import { ADD_EMPLOYEE, CREATE_LOCATION } from "../../../utility/Route";
 import "./Style.css";
+import { isName } from "../../../utility/Regex";
 
 const EditDepartment = () => {
 
     const { id } = useParams();
     const display = pathContains("/pages/department/departments/") && id !== undefined;
     const [data, setData] = useState({});
+    const [initialData, setPrevData] = useState({});
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [Locations, setLocations] = useState([]);
@@ -32,8 +34,10 @@ const EditDepartment = () => {
         let { data } = await response.data;
       
         data['location'] = data.location && data.location.id;
+        data['department_head_id'] = data.department_head_id === 0 ? "" : data.department_head_id;
        
         setData(data);
+        setPrevData(data);
     
     }, [ HOST, id ])
 
@@ -71,12 +75,15 @@ const EditDepartment = () => {
                 label: Name(item) + "("+ employee_no +")"
             })
         }
-
+        
         setEmployees(employees);
+
     }, []);
     
     useEffect(() => {
         if (display) {
+            setSuccess(false);
+            setMessage("");
             fetchData();
             fetchLocations();
             fetchEmployees();
@@ -119,10 +126,42 @@ const EditDepartment = () => {
         }     
     }
 
-    const handleClearInput = (event) => {
-        event.preventDefault();
-        setData({ ...data, [event.target.id]: ""});        
-    }
+    // error message
+    const [err, setErr] = useState({});
+
+    useEffect(() => {
+
+        let error = !name ? "Required" : "";
+
+        if (name && !isName(name)) {
+            error = "Contains invalid characters."
+        }
+
+        if (error !== err.name) {
+            setErr({ ...err, name: error });
+        }
+
+    }, [ err, err.name, name ]);
+
+    useEffect(() => {
+
+        let error = !tel_no ? "Required" : "";
+
+        if (error !== err.tel_no) {
+            setErr({ ...err, tel_no: error });
+        }
+
+    }, [ err, err.tel_no, tel_no ]);
+
+    useEffect(() => {
+
+        let error = !location ? "Required" : "";
+
+        if (error !== err.location) {
+            setErr({ ...err, location: error });
+        }
+
+    }, [ err, err.location, location ]);
 
     function clearData () {
         setMessage("");
@@ -210,14 +249,13 @@ const EditDepartment = () => {
                                         onChange={handleInputChange}
                                     />
                                     <Input 
-                                        required
+                                        errMessage={err.name}
                                         id="name" 
                                         label="name"
                                         type="text" 
                                         value={name} 
                                         placeholder="Mayor's Office"
                                         onChange={handleInputChange} 
-                                        onClear={handleClearInput }
                                     />
                                     <Select 
                                         id="department_head_id" 
@@ -230,6 +268,7 @@ const EditDepartment = () => {
                                         onChange={handleInputChange} 
                                     />
                                     <Select 
+                                        errMessage={err.location}
                                         id="location" 
                                         label="location" 
                                         value={location} 
@@ -246,20 +285,28 @@ const EditDepartment = () => {
                                         value={email} 
                                         placeholder="johndoe@gmail.com"
                                         onChange={handleInputChange} 
-                                        onClear={handleClearInput}
                                     />
                                     <Input 
+                                        errMessage={err.tel_no}
                                         id="tel_no" 
                                         label="tel no" 
                                         type="text" 
                                         value={tel_no} 
                                         placeholder="444-444"
                                         onChange={handleInputChange} 
-                                        onClear={handleClearInput}
                                     />
                                     <div className="btnContainer">
-                                        {!isSuccess && <CancelButton text="Reset" onClick={()=> fetchData()} />}
-                                        <SubmitButton type="submit" text={isSuccess ? "OK" : "Save"} />
+                                        <CancelButton 
+                                            display={isDataChanged(initialData, data)} 
+                                            text="Reset" 
+                                            onClick={()=> {
+                                                setData(initialData);
+                                            }} 
+                                        />
+                                        <SubmitButton  
+                                            disabled={!isDataChanged(initialData, data)} 
+                                            text={isSuccess ? "OK" : "Save"} 
+                                        />
                                     </div>
                                 </form>
                             </div>

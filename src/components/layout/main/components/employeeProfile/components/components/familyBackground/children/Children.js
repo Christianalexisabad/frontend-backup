@@ -2,20 +2,16 @@ import React, { useCallback, useEffect, useState } from "react";
 import Button from "../../../../../../../../forms/button/Button";
 import { getHost } from "../../../../../../../../../utility/APIService";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./Children.css";
 import { getEmployeeID, getRole } from "../../../../../../../../../utility/Session";
 import { EDIT_CHILD } from "../../../../../../../../../utility/Route";
 import EditButton from "../../../../../../../../forms/editButton/EditButton";
-import { hasPermission } from "../../../../../../../../../utility/Permission";
-import AddChildren from "./components/AddChildren";
 
 export default function Children(props){
 
     const HOST = getHost();
     const employee = getEmployeeID();
     const [data, setData] = useState([]);
-    const [Add, setAdd] = useState(false);
     const ROLE = getRole();
 
     const fetchData = useCallback(async () => {
@@ -52,14 +48,10 @@ export default function Children(props){
 
     return (
         <div className="Children">
-            {Add && <AddChildren onCancel={()=> setAdd(false)} />}
             <div className="row">
                 <div className="col-lg-12">
                     <h1 className="text-secondary">
                         <span>Children </span>    
-                        {hasPermission("can_edit_employee") && <span style={{ fontSize: "15px" }}>
-                            <Link onClick={()=> setAdd(true)}>Add Member</Link>
-                        </span>}
                         <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
                     </h1>
                 </div>

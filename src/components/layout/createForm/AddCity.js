@@ -15,14 +15,14 @@ const AddCity = (props) => {
 
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         zip_code: "",
         name: "",
     }
 
     const display = isPath(ADD_CITY);
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -38,7 +38,7 @@ const AddCity = (props) => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -113,7 +113,7 @@ const AddCity = (props) => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

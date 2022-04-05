@@ -8,12 +8,14 @@ import SubmitButton from "../../../../../../../forms/submitButton/SubmitButton";
 import CancelButton from "../../../../../../../forms/cancelButton/CancelButton";
 import Button from "../../../../../../../forms/button/Button";
 import { useParams } from "react-router-dom";
+import { isDataChanged } from "../../../../../../../../utility/Functions";
 
 export default function Residential(){
 
     const HOST = getHost();
     const { employee } = useParams();
     const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
 
     const {
         id,
@@ -40,6 +42,7 @@ export default function Residential(){
         const response = await axios.get(getHost() + "/api/residential-address/"+ employee +"/");
         const { data } = await response.data;
         setData(data);
+        setInitialData(data);
     }, [ employee ])
 
     const fetchBarangays = async () => {
@@ -130,6 +133,15 @@ export default function Residential(){
         }
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        if (!isDataChanged(initialData, data)) {
+            setMessage("");
+            setEditable(false);
+        }
+        setData(initialData);
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="row">
@@ -147,11 +159,7 @@ export default function Residential(){
                     <CancelButton 
                         text="cancel" 
                         display={isEditable}
-                        onClick={() => {
-                            fetchData();
-                            setMessage("");
-                            setEditable(false);
-                        }} 
+                        onClick={handleCancel}
                     />
                     <SubmitButton 
                         text={isSuccess ? "Ok" : "Save"}

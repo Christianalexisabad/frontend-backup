@@ -13,14 +13,14 @@ const ReportProblem = () => {
 
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         from: "candonimunicipality@gmail.com",
         to: "christianalexes@gmail.com",
         subject: "",
         content: "",
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -47,7 +47,7 @@ const ReportProblem = () => {
         e.preventDefault();
         
         if (isSuccess) {
-            setData(initialValues);
+            setData(initialData);
             setSuccess(false);
             setMessage("");
             return false;

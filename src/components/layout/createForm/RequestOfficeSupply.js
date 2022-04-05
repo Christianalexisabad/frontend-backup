@@ -11,7 +11,7 @@ import CancelButton from "../../forms/cancelButton/CancelButton";
 import { getEmployeeID } from "../../../utility/Session";
 import { getCurrentDate } from "../../../utility/DateTime";
 
-const initialValues = {
+const initialData = {
     id: null,
     description: "",
     unit_value: 0,
@@ -32,7 +32,7 @@ const RequestOfficeSupply = (props) => {
     const HOST = getHost();
     // const employee = getEmployeeID();
     // const history = useHistory();
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -43,7 +43,7 @@ const RequestOfficeSupply = (props) => {
     }, [ HOST, stockID ])
     
     useEffect(() => {
-        stockID ? fetchData() : setData(initialValues);
+        stockID ? fetchData() : setData(initialData);
     }, [stockID, fetchData ]);
 
     const [Types, setTypes] = useState([]);
@@ -110,7 +110,7 @@ const RequestOfficeSupply = (props) => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -168,7 +168,7 @@ const RequestOfficeSupply = (props) => {
                                     text="Request Office Supply"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         props.onCancel();
                                     }}
                                 />
@@ -226,7 +226,7 @@ const RequestOfficeSupply = (props) => {
                                     onChange={handleInputChange} 
                                 />
                                 <div className="btnContainer">
-                                    <CancelButton text="Clear" onClick={()=> setData(initialValues)} />
+                                    <CancelButton text="Clear" onClick={()=> setData(initialData)} />
                                     <SubmitButton text={isSuccess ? "New" : "Confirm"}/>
                                 </div>
                             </form>  

@@ -19,12 +19,12 @@ const AddEquipmentArticle = () => {
     const display = isPath(ADD_EQUIPMENT_ARTICLE);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         name: "",
         type: null,
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -48,7 +48,7 @@ const AddEquipmentArticle = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -93,7 +93,7 @@ const AddEquipmentArticle = () => {
                                     text="Add New Article"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -130,7 +130,7 @@ const AddEquipmentArticle = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text={isSuccess ? "New" : "Save"} /> 

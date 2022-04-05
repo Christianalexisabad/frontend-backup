@@ -10,9 +10,15 @@ export default function FamilyBackground(){
     const { tab } = useParams();
     const display = tab === "family background" ? true : false;
 
+    const styles = {
+        container: { 
+            maxHeight: window.innerHeight - (window.innerHeight * 0.25), overflow: '' 
+        }
+    }
+
     return (
         display &&
-        <div className="FamilyBackground" style={{ maxHeight: window.innerHeight - (window.innerHeight * 0.25), overflow: '' }}>
+        <div className="FamilyBackground" style={styles.container} >
             <div className="row m-2">
                 <div className="col-lg-12">
                     <Spouse />

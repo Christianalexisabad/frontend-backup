@@ -16,7 +16,7 @@ import Title from "../../forms/title/Title";
 import axios from "axios";
 import "./Style.css";
 
-const initialValues = {
+const initialData = {
     sur_name: "", 
     first_name: "", 
     middle_name: "", 
@@ -56,7 +56,7 @@ const AddEmployee = () => {
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [prevData, setPrevData] = useState({});
 
     let {
@@ -534,7 +534,7 @@ const AddEmployee = () => {
     function clearData () {
         setTab(0);
         setDialogMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -958,8 +958,16 @@ const AddEmployee = () => {
         )
     }
 
+    const handleClose = () => {
+        setData(initialData);
+        history.goBack();
+    }
+
+    const handlePrevious = () => setTab(tab => tab - 1);
+    const handleNext = () => setTab(tab => tab + 1);
+
     return (
-        display ?
+        display &&
         <div className="CreateForm">
             <center>
                 <div className="container">
@@ -968,10 +976,7 @@ const AddEmployee = () => {
                             <div className="header text-start">
                                 <Title 
                                     text="Add New Employee"
-                                    onClick={()=> {
-                                        setData(initialValues);
-                                        history.goBack();
-                                    }}
+                                    onClick={handleClose}
                                 />
                             </div>
                         </div>
@@ -980,19 +985,26 @@ const AddEmployee = () => {
                         <div className="col-lg-12">
                             <ul className="tab p-0">
                                 {tabs.map(item =>{
+
                                     const { id, title } = item;
+                                    
+                                    const tabStyle = {
+                                        color: id === tab ? 'rgb(50, 50, 50)' : 'black',
+                                        backgroundColor: id === tab ? 'rgb(220,250,220)' : 'white',
+                                    }
+
+                                    const handleTabClick = event => {
+                                        event.preventDefault();
+                                        setTab(id);
+                                    }
+
                                     return (
                                         <li key={id}
-                                            className="tabItem" style={{
-                                                color: id === tab ? 'rgb(50, 50, 50)' : 'black',
-                                                backgroundColor: id === tab ? 'rgb(220,250,220)' : 'white',
-                                            }}
-                                            onClick={e => {
-                                                e.preventDefault();
-                                                setTab(id);
-                                            }}
+                                            className="tabItem" 
+                                            style={tabStyle}
+                                            onClick={handleTabClick}
                                         >
-                                            {title}                                    
+                                            <span>{ title }</span>                                   
                                         </li>
                                     )
                                 })}
@@ -1009,20 +1021,23 @@ const AddEmployee = () => {
                                         onClose={() => setMessage("")}
                                     />
                                     {
-                                        tab === 0 ? renderBasicInformation() : 
-                                        tab === 1 ? renderWorkInformation() : renderUserAccount()
+                                        tab === 0 ? 
+                                        renderBasicInformation() : 
+                                        tab === 1 ? 
+                                        renderWorkInformation() : 
+                                        renderUserAccount()
                                     }
                                     <div className="row">
                                         <div className="col-lg-6">
                                             <Button 
                                                 disabled={tab === 0 ? true : false}  
                                                 text="Previous"
-                                                onClick={() => setTab(tab => tab - 1)} 
+                                                onClick={handlePrevious} 
                                             />
                                             <Button 
                                                 disabled={tab === 2 ? true : false}  
                                                 text="Next"
-                                                onClick={() => setTab(tab => tab + 1)} 
+                                                onClick={handleNext}  
                                             />
                                         </div>
                                         <div className="col-lg-6 text-end">
@@ -1045,7 +1060,7 @@ const AddEmployee = () => {
                     </div>
                 </div>
             </center>
-        </div> : null
+        </div> 
     )
 }
 

@@ -1,5 +1,5 @@
 import ImageUploader from "../../forms/imageUploader/ImageUploader";
-import { getLocation, isPath, Name } from "../../../utility/Functions";
+import { getLocation, hasChanges, isPath, Name } from "../../../utility/Functions";
 import DialogBox from "../../forms/dialogBox/DialogBox";
 import { getHost } from "../../../utility/APIService";
 import React, { useEffect, useState } from "react";
@@ -13,12 +13,12 @@ import CancelButton from "../../forms/cancelButton/CancelButton";
 import { useHistory } from "react-router-dom";
 import CreateLocation from "./CreateLocation";
 import { ADD_DEPARTMENT, CREATE_LOCATION } from "../../../utility/Route";
+import { isName } from "../../../utility/Regex";
 
-const initialValues = {
-    imageURL: getHost() + "/media/images/department/default.jpg",
+const initialData = {
     name: "",
     image: null,
-    department_head: "",
+    department_head: null,
     location: "",
     email: "",
     tel_no: "",
@@ -27,7 +27,7 @@ const initialValues = {
 const AddDepartment = () => {
 
     const display = isPath(ADD_DEPARTMENT);
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [Locations, setLocations] = useState([]);
@@ -70,9 +70,11 @@ const AddDepartment = () => {
     }
 
     useEffect(() => {
-        fetchLocations();
-        fetchEmployees();
-    }, []);
+        if (display){
+            fetchLocations();
+            fetchEmployees();
+        }
+    }, [ display ]);
 
     let {
         email,
@@ -97,11 +99,7 @@ const AddDepartment = () => {
             if (fileType.search("image") === -1) {
                 setDialogMessage("Invalid file type.")
             } else {
-                setData({ 
-                    ...data, 
-                    [id]: file, 
-                    imageURL: fileURL, 
-                });
+                setData({...data, [id]: file,  imageURL: fileURL });
             }
 
         } else {
@@ -109,9 +107,46 @@ const AddDepartment = () => {
         }     
     }
 
+    // error message
+    const [err, setErr] = useState({});
+
+    useEffect(() => {
+
+        let error = !name ? "Required" : "";
+
+        if (name && !isName(name)) {
+            error = "Contains invalid characters."
+        }
+
+        if (error !== err.name) {
+            setErr({ ...err, name: error });
+        }
+
+    }, [ err, err.name, name ]);
+
+    useEffect(() => {
+
+        let error = !tel_no ? "Required" : "";
+
+        if (error !== err.tel_no) {
+            setErr({ ...err, tel_no: error });
+        }
+
+    }, [ err, err.tel_no, tel_no ]);
+
+    useEffect(() => {
+
+        let error = !location ? "Required" : "";
+
+        if (error !== err.location) {
+            setErr({ ...err, location: error });
+        }
+
+    }, [ err, err.location, location ]);
+
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -181,7 +216,7 @@ const AddDepartment = () => {
                                 <Title 
                                     text="Add New Department"
                                     onClick={() => {
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -202,6 +237,7 @@ const AddDepartment = () => {
                                         onChange={handleInputChange}
                                     />
                                     <Input 
+                                        errMessage={err.name}
                                         id="name" 
                                         label="name"
                                         type="text" 
@@ -210,11 +246,11 @@ const AddDepartment = () => {
                                         onChange={handleInputChange} 
                                     />
                                     <Select 
-                                        refresh={()=> fetchEmployees()}
                                         id="department_head" 
                                         label="department head" 
                                         value={department_head}
                                         options={Employees}
+                                        refresh={()=> fetchEmployees()}
                                         onChange={handleInputChange} 
                                     />
                                     <Input 
@@ -226,6 +262,7 @@ const AddDepartment = () => {
                                         onChange={handleInputChange} 
                                     />
                                     <Input 
+                                        errMessage={err.tel_no}
                                         id="tel_no" 
                                         label="tel no" 
                                         type="text" 
@@ -234,6 +271,7 @@ const AddDepartment = () => {
                                         onChange={handleInputChange} 
                                     />
                                     <Select 
+                                        errMessage={err.location}
                                         id="location" 
                                         label="location" 
                                         value={location} 
@@ -244,8 +282,15 @@ const AddDepartment = () => {
                                         onChange={handleInputChange} 
                                     />
                                     <div className="btnContainer">
-                                        <CancelButton display={false} text="Clear" onClick={()=> setData(initialValues)} />
-                                        <SubmitButton text={isSuccess ? "New" : "Save"} />
+                                        <CancelButton 
+                                            display={hasChanges(data)} 
+                                            text="Reset" 
+                                            onClick={()=> setData(initialData)} 
+                                        />
+                                        <SubmitButton 
+                                            disabled={hasChanges(err)} 
+                                            text={isSuccess ? "New" : "Save"} 
+                                        />
                                     </div>
                                 </form>
                             </div>

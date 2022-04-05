@@ -17,7 +17,7 @@ const UploadFile = (props) => {
 
     const { onCancel , to } = props;
     const HOST = getHost();
-    const initialValues = {
+    const initialData = {
         file: null,
         fileName: "",
         fileSize: null,
@@ -26,7 +26,7 @@ const UploadFile = (props) => {
         description: "",
     }
 
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [departmentID, setDepartmentID] = useState(null);
@@ -78,7 +78,7 @@ const UploadFile = (props) => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -134,7 +134,7 @@ const UploadFile = (props) => {
                                 <Title 
                                     text="Upload File"
                                     onClick={() => {
-                                        setData(initialValues);
+                                        setData(initialData);
                                         onCancel();
                                     }}
                                 />
@@ -182,7 +182,7 @@ const UploadFile = (props) => {
                                         value={fileSize && fileSize.toLocaleString()}       
                                     />
                                     <div className="btnContainer">
-                                        <CancelButton display={false} text="Clear" onClick={()=> setData(initialValues)} />
+                                        <CancelButton display={false} text="Clear" onClick={()=> setData(initialData)} />
                                         <SubmitButton text={isSuccess ? "New" : "Save"} />
                                     </div>
                                 </form>

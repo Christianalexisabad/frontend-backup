@@ -17,11 +17,11 @@ const AddBarangay = (props) => {
     const history = useHistory();
     const display = isPath(ADD_BARANGAY);
 
-    const initialValues = {
+    const initialData = {
         name: "",
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -36,7 +36,7 @@ const AddBarangay = (props) => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -76,7 +76,7 @@ const AddBarangay = (props) => {
                                     text="Add Barangay"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -106,7 +106,7 @@ const AddBarangay = (props) => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

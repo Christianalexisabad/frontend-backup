@@ -21,7 +21,7 @@ const AddEducationalBackground = () => {
     const history = useHistory();
     const employee = getEmployeeID();
 
-    const initialValues = {
+    const initialData = {
         level: "",
         school_name: "",
         course: "",
@@ -31,7 +31,7 @@ const AddEducationalBackground = () => {
         date_graduated: ""
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     
@@ -93,7 +93,7 @@ const AddEducationalBackground = () => {
                                     text="Add Educational Background"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -163,7 +163,7 @@ const AddEducationalBackground = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

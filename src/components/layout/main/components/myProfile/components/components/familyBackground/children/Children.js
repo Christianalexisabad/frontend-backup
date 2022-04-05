@@ -2,15 +2,17 @@ import React, { useCallback, useEffect, useState } from "react";
 import Button from "../../../../../../../../forms/button/Button";
 import { getHost } from "../../../../../../../../../utility/APIService";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import "./Children.css";
 import { EDIT_CHILD } from "../../../../../../../../../utility/Route";
 import EditButton from "../../../../../../../../forms/editButton/EditButton";
+import AddChild from "./components/AddChild";
+import CancelButton from "../../../../../../../../forms/cancelButton/CancelButton";
+import { getEmployeeID } from "../../../../../../../../../utility/Session";
 
 export default function Children(props){
 
     const HOST = getHost();
-    const { employee } = useParams();
+    const employee = getEmployeeID();
     const [data, setData] = useState([]);
 
     const fetchData = useCallback(async () => {
@@ -45,6 +47,8 @@ export default function Children(props){
         }
     }
 
+    const [isAddChild, setIsAddChild] = useState(false);
+
     return (
         <div className="Children">
             <div className="row">
@@ -53,11 +57,21 @@ export default function Children(props){
                         <span>Children</span>    
                         <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
                     </h1>
-                    <Button text="Add New" onClick={()=>fetchData()}/>
+                    <CancelButton 
+                        display={isAddChild}
+                        text="Cancel" 
+                        onClick={()=> setIsAddChild(false) }
+                    />
+                    <Button 
+                        display={!isAddChild}
+                        text="Add New" 
+                        onClick={()=> setIsAddChild(true) }
+                    />
                 </div>
             </div>
             <div className="row">
                 <div className="col-lg-12">
+                    { isAddChild && <AddChild onClose={()=> setIsAddChild(false)} /> }
                     <table className="table" style={{ width: '100%'}}>
                         <thead>
                             <tr>

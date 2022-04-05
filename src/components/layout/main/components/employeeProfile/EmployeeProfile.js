@@ -69,26 +69,29 @@ export default function EmployeeProfile(props) {
         },
     ];
 
-    function renderHeader() {
+    function renderTab() {
         return (
             <ul className="tabMenu">
                 {tabs.map((item, index) => {
                     
                     const { title } = item; 
 
+                    const tabStyle = {
+                        color: title === tab ? 'rgb(50, 150, 50)' : 'rgb(50, 50, 50)',
+                        backgroundColor: title === tab? 'rgb(220, 250, 220)' : 'rgb(255, 255, 255)'
+                    }
+
+                    const handleTabClick = event => {
+                        event.preventDefault();
+                        history.push("/pages/employee/employees/" + employee + "/" + title + "/" + session_id )
+                    }
+
                     return (
                         <li 
                             key={ index }
                             className="tabItem"
-                            style={{
-                                color: title === tab ? 'rgb(50, 150, 50)' : 'rgb(50, 50, 50)',
-                                backgroundColor: title === tab? 'rgb(220, 250, 220)' : 'rgb(255, 255, 255)'
-                            }}
-                            onClick={
-                                () => {
-                                    history.push("/pages/employee/employees/" + employee + "/" + title + "/" + session_id )
-                                }
-                            }
+                            style={tabStyle}
+                            onClick={handleTabClick}
                         >
                             <span>{title}</span>
                         </li>
@@ -98,10 +101,34 @@ export default function EmployeeProfile(props) {
         )
     }
 
+    function renderContent() {
+        return (
+            <div className="content">
+                <BasicInfo />
+                <WorkInfo />
+                <ContactInfo />
+                <AddressInfo />
+                <FamilyBackground />
+                <EducationalBackground />
+                <Leave />
+                <Attendance />
+            </div>
+        )
+    }
+
+    const styles = {
+        container: { 
+            height: window.innerHeight -(window.innerHeight * 0.15) 
+        },
+        content: { 
+            overflow: 'auto' 
+        }
+    }
+
     return (
         display &&
         <div className="EmployeeProfile">
-            <div className="container bg-white" style={{ height: window.innerHeight -(window.innerHeight * 0.15) }}>
+            <div className="container bg-white" style={styles.container}>
                 <div className="row p-0">
                     <div className="col-lg-12 p-0">
                         <div className="header">
@@ -113,16 +140,11 @@ export default function EmployeeProfile(props) {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-lg-12">
-                        <div className="content">
-                            <div className="row">
-                                <div className="col-lg-4 p-0">
-                                    {renderHeader()}
-                                </div>
-                                <div className="col-lg-8" style={{ overflow: 'auto' }}>
-                                </div>
-                            </div>                            
-                        </div>
+                    <div className="col-lg-4 p-0">
+                        {renderTab()}
+                    </div>
+                    <div className="col-lg-8" style={styles.content}>
+                        {renderContent()}
                     </div>
                 </div>
             </div>

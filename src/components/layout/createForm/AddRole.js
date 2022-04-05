@@ -20,12 +20,12 @@ const AddRole = () => {
     const display = isPath(ADD_ROLE);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         title: "",
         user_type: null,
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [UserTypes, setUserTypes] = useState({});
@@ -86,7 +86,7 @@ const AddRole = () => {
                                     text="Add New Role"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -125,7 +125,7 @@ const AddRole = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

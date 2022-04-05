@@ -22,12 +22,12 @@ export default function AddressInfo(){
         display &&
         <div className="AddressInfo" style={styles.container}>
             <div className="row">
-                <div className="col-lg-12">
+                <div className="col-lg-12" >
                     <Permanent />
                 </div>  
             </div>
             <div className="row">
-                <div className="col-lg-12">
+                <div className="col-lg-12" >
                     <Residential />
                 </div>
             </div>

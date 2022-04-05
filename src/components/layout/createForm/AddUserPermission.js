@@ -22,12 +22,12 @@ const AddUserPermission = () => {
     const display = isPath(ADD_USER_PERMISSION);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         user: "",
         permission: ""
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -67,7 +67,7 @@ const AddUserPermission = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -108,7 +108,7 @@ const AddUserPermission = () => {
                                     text="Add User Permission"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -148,7 +148,7 @@ const AddUserPermission = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

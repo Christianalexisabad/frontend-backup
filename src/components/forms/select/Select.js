@@ -1,20 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import { getSessionID } from '../../../utility/Session';
 import './Select.css';
 
 const Select = (props) => {
-
-    const [styles, setStyle] = useState({
-        container: {},
-        button: { 
-            color: 'blue' 
-        },
-        errMessage: {
-            fontSize: '12px'
-        }
-    });
-
+   
     const {
         id,
         label,
@@ -27,6 +17,18 @@ const Select = (props) => {
         onChange,
         onClick
     } = props;
+
+    const styles = {
+        container:{
+            borderBottom: disabled || !value ? '1px solid rgb(230, 230, 230)' : '1px solid rgb(100, 250, 100)'
+        },
+        button: { 
+            color: 'blue' 
+        },
+        errMessage: {
+            fontSize: '12px'
+        }
+    };
 
     let data = [];
 
@@ -47,24 +49,6 @@ const Select = (props) => {
         }
     }
 
-    useEffect(() => {
-
-        if (disabled || !value) {
-            setStyle({ ...styles, 
-                container: {
-                    borderBottom: '1px solid rgb(230, 230, 230)',
-                }
-            })
-        } else {
-            setStyle({ ...styles, 
-                container: {
-                    borderBottom: '1px solid rgb(100, 250, 100)',
-                }
-            })
-        }
-
-    }, [ disabled, value, styles ]);
-
     return (
         <div className="select" style={styles.container}>
             <label>
@@ -78,9 +62,14 @@ const Select = (props) => {
                     <button 
                         type="button" 
                         style={styles.button} 
-                        onClick={ onClick }>{ createText }
-                    </button> : <Link 
-                        className="link" to={ create + getSessionID() }>
+                        onClick={ onClick }
+                    >
+                        { createText }
+                    </button> : 
+                    <Link 
+                        className="link" 
+                        to={ create + getSessionID() }
+                    >
                         <span>{ createText }</span>
                     </Link> }
                 { refresh && 

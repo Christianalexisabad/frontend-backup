@@ -17,12 +17,12 @@ const AddSalary = () => {
     const display = isPath(ADD_SALARY);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         pay_grade: "",
         amount: 0,
     }
 
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -38,7 +38,7 @@ const AddSalary = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -81,7 +81,7 @@ const AddSalary = () => {
                                     text="Add New Salary"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues)
+                                        setData(initialData)
                                         history.goBack();
                                     }}
                                 />
@@ -119,7 +119,7 @@ const AddSalary = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text={isSuccess ? "New" : "Save"} /> 

@@ -205,6 +205,33 @@ export function hasError(object) {
     return false;
 }
 
+export function isEmpty(data) {
+
+    for (const key in data) {
+        if (data[key]) {
+            return false;
+        }
+    }    
+
+    return true;
+}
+
+export function isDataChanged(initialData, currentData) {
+    try {
+
+        for (const item in initialData) {
+            if (initialData[item] !== currentData[item]) {
+                return true;
+            }
+        }
+
+    } catch (error) {
+        console.log("isDataChanged:" + error);
+        return false;        
+    }
+    return false;
+}
+
 export function hasChanges(object) {
 
     try {

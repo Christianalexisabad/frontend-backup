@@ -9,6 +9,7 @@ import { getHost } from "../../../../../../../../utility/APIService";
 import { NameExtensions } from "../../../../../../../../utility/Constants";
 import DialogBox from "../../../../../../../forms/dialogBox/DialogBox";
 import { getEmployeeID } from "../../../../../../../../utility/Session";
+import { isDataChanged } from "../../../../../../../../utility/Functions";
 
 export default function Mother(props){
 
@@ -16,12 +17,14 @@ export default function Mother(props){
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [data, setData] = useState([]);
+    const [initialData, setInitialData] = useState({});
 
     const fetchData = async () => {
         try {
             const response = await axios.get(getHost() + "/api/mothers/get/" + getEmployeeID() + "/");
             const { data } = await response.data;
             setData(data);
+            setInitialData(data);
         } catch (error) {
             error.response.status = 404 && console.clear();
         }
@@ -29,7 +32,16 @@ export default function Mother(props){
 
     useEffect(() => {
         fetchData();
-    }, [])
+    }, []);
+
+    const handleCancel = (event) => {
+        event.preventDefault();
+        if (!isDataChanged(initialData, data)) {
+            setMessage("");
+            setEditable(false);
+        }
+        setData(initialData);
+    }
     
     const {
         first_name,
@@ -70,11 +82,7 @@ export default function Mother(props){
                     <CancelButton 
                         text="cancel" 
                         display={isEditable}
-                        onClick={() => {
-                            fetchData();
-                            setMessage("");
-                            setEditable(false);
-                        }} 
+                        onClick={handleCancel} 
                     />
                     <SubmitButton 
                         text={isSuccess ? "Ok" : "Save"}

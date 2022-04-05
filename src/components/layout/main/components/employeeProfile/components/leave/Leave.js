@@ -8,11 +8,13 @@ import "./Leave.css";
 export default function Leave(props){
 
     const HOST = getHost();
-    const { employee } = useParams();
+    const { employee, tab } = useParams();
+    const display = tab === "leave" ? true : false;
+
     const [data, setData] = useState([]);
 
     const fetchData = useCallback(async () => {
-        const response = await axios.get(HOST + "/api/leaves/get/employee="+ employee +"/");
+        const response = await axios.get(HOST + "/api/employee-leaves/employee="+ employee +"/");
         const { data } = await response.data;
         setData(data);
     }, [ HOST, employee ])
@@ -24,16 +26,16 @@ export default function Leave(props){
     function renderTableHeader() {
 
         const header = [
-            { id: "id", value: "no" },
-            { id: "leave_type", value: "leave type" },
-            { id: "other_details", value: "other details" },
-            { id: "number_of_working_days", value: "working days" },
-            { id: "start_date", value: "start date" },
-            { id: "end_date", value: "end date" },
-            { id: "supervisor_remarks", value: "supervisor remarks" },
-            { id: "supervisor_approval_date", value: "date" },
-            { id: "hr_remarks", value: "HR remarks" },
-            { id: "hr_approval_date", value: "date" },
+            { id: "id", value: "No" },
+            { id: "leave_type", value: "Leave Type" },
+            { id: "other_details", value: "Other Details" },
+            { id: "number_of_working_days", value: "Working Days" },
+            { id: "start_date", value: "Start Date" },
+            { id: "end_date", value: "End Date" },
+            { id: "supervisor_remarks", value: "Supervisor Remarks" },
+            { id: "supervisor_approval_date", value: "Date" },
+            { id: "hr_remarks", value: "HR Remarks" },
+            { id: "hr_approval_date", value: "Date" },
         ]
         return (
             <thead> 
@@ -53,25 +55,34 @@ export default function Leave(props){
     function renderTbody() {
         return (
             <tbody>
-                {data.length > 0 ? data.map((item, index) => {
-                    return (
-                        <tr key={item.id}>
-                        </tr>
-                    )
-                }) : <tr>
-                    <td colSpan={10} className="text-center text-secondary"> <span>No data to show</span> </td>
-                </tr> }
+                {data.length > 0 ? 
+                    data.map((item, index) => {
+                        return (
+                            <tr key={index}>
+                            </tr>
+                        )
+                    }) : 
+                    <tr>
+                        <td colSpan={10} className="text-center text-secondary"> 
+                            No data to show
+                        </td>
+                    </tr> 
+                }
             </tbody>
         )
     }
 
     return (
+        display &&
         <div className="Leave">
             <div className="row">
                 <div className="col-lg-12">
                     <h1 className="text-secondary">
-                        <span>Leave </span>
-                        <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
+                        Leave
+                        <Button 
+                            icon="fa fa-refresh" 
+                            onClick={()=> fetchData() }
+                        />
                     </h1>
                 </div>
             </div>

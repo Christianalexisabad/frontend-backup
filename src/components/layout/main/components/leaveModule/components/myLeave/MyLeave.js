@@ -35,14 +35,14 @@ export default function MyLeave() {
         setData(data);
     }, [ HOST, path ])
 
-    const initialValues = {
+    const initialData = {
         employee: employee,
         status: "", 
         startDate: "",
         endDate: "",
     }
 
-    const [filterData, setFilterData] = useState(initialValues);
+    const [filterData, setFilterData] = useState(initialData);
     
     const handleFilterChange = (e) => {
         e.preventDefault();
@@ -148,7 +148,7 @@ export default function MyLeave() {
                         <LeaveFilter 
                             data={filterData}
                             onChange={handleFilterChange}
-                            onClear={()=> setFilterData(initialValues)}                                
+                            onClear={()=> setFilterData(initialData)}                                
                         />
                     </div>
                 </div>

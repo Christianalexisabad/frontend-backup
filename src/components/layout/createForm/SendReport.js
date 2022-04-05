@@ -18,7 +18,7 @@ const UploadReport = (props) => {
 
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         report_type: null,
         employee: getEmployeeID(),
         attachement: null,
@@ -28,7 +28,7 @@ const UploadReport = (props) => {
 
     const display = isPath(UPLOAD_REPORT);
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -86,7 +86,7 @@ const UploadReport = (props) => {
                                     text="Generate Report"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -122,7 +122,7 @@ const UploadReport = (props) => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

@@ -20,12 +20,12 @@ const CreateUserGroup = () => {
     const display = isPath(CREATE_USER_GROUP);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         group: "",
         user: ""
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -65,7 +65,7 @@ const CreateUserGroup = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -106,7 +106,7 @@ const CreateUserGroup = () => {
                                     text="Create User Group"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -148,7 +148,7 @@ const CreateUserGroup = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

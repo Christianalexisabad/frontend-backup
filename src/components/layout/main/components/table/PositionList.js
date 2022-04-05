@@ -1,55 +1,45 @@
-
-
-import { isPath } from "../../../../../utility/Functions";
-import { getHost } from "../../../../../utility/APIService";
+import CustomLink from "../../../../forms/customLink/CustomLink";
+import { hasPermission } from "../../../../../utility/Permission";
 import SearchBar from "../../../../forms/searchBar/SearchBar";
+import { getHost } from "../../../../../utility/APIService";
+import Download from "../../../../forms/printButton/PrintButton";
+import { isPath } from "../../../../../utility/Functions";
 import Entries from "../../../../forms/entries/Entries";
-import React, { useState, useEffect } from "react";
 import Button from "../../../../forms/button/Button";
+import React, { useState, useEffect } from "react";
 import Title from "../../../../forms/title/Title";
-import axios from "axios";
 import "./Table.css";
-import { getUsername } from "../../../../../utility/Session";
-import DeleteButton from "../../../../forms/deleteButton/DeleteButton";
-import PreviewButton from "../../../../forms/previewButton/PreviewButton";
-import DownloadButton from "../../../../forms/downloadButton/DownloadButton";
-import SubmitButton from "../../../../forms/submitButton/SubmitButton";
-import UploadFile from "../../../createForm/UploadFile";
+import axios from "axios";
+import { ADD_POSITION, EDIT_POSITION, POSITIONS } from "../../../../../utility/Route";
+import EditButton from "../../../../forms/editButton/EditButton";
 import TableFooter from "./components/TableFooter";
 
-export default function MyFile() {
+export default function PositionList() {
 
-    const display = isPath("/pages/file/my%20files/")
-    const endpoint = getHost() + "/api/my-files/get/"+ getUsername() + "/";
-
+    const display = isPath(POSITIONS);
+    const endpoint = getHost() + "/api/positions/";
     const [data, setData] = useState([]);
     const [entry, setEntry] = useState(0);
     const [searchTerm, setSearchTerm] = useState("");
-    const [isUpload, setUpload] = useState(false);
+    const canEdit = hasPermission("can_edit_position");
 
-    const fetchData = async (endpoint,) => {
+    const fetchData = async (endpoint) => {
         const response = await axios.get(endpoint)
-        const { data } = await response.data;
-        setData(await data);
+        const { total, data } = await response.data;
+        setData(data);
+        setEntry(total);
     }
-
-    const fetchEntry = async () => {
-        const response = await axios.get(endpoint.replace("get", "total"))
-        const { data } = await response.data;
-        setEntry(data); 
-    }
-
+    
     useEffect(() => {
         if (display) {
             fetchData(endpoint);
-            fetchEntry();
         }
-    /* eslint-disable react-hooks/exhaustive-deps */
-    }, [ display ])
+    }, [ display, endpoint ])
 
     const handleSearchBarChange = (e) => {
         e.preventDefault();
         setSearchTerm(e.target.value);
+        fetchData(searchTerm ? endpoint + "search="+searchTerm+"/" : endpoint);
     }
 
     const handleEntry = (e) => {
@@ -65,18 +55,18 @@ export default function MyFile() {
         fetchData(endpoint + "order="+order+"/")
     }
 
-
     function renderHeader() {
         return (
             <div className="header">
                 <div className="row">
                         <div className="col-left col-lg-6">
                             <Title  
-                                text="My Files"
+                                text="Positions"
                             />
-                            <SubmitButton
-                                text="Add New File"
-                                onClick={()=> setUpload(true)}
+                            <CustomLink 
+                                text="Add Position"
+                                // permission="can_add_position"
+                                to={ADD_POSITION}
                             />
                             <Button 
                                 type="button"
@@ -100,13 +90,13 @@ export default function MyFile() {
                 <div className="row">
                         <div className="col-left col-lg-6">
                             <Entries 
-                                // value={data.length}
-                                entries={entry}
+                                value={entry}
+                                entries={data.length}
                                 onChange={handleEntry}
                             />
                         </div>
                         <div className="col-right col-lg-6">
-                            {/* <Download data={data}/> */}
+                            <Download data={data}/>
                         </div>  
                 </div>
             </div>
@@ -114,22 +104,26 @@ export default function MyFile() {
     }
 
     const header = [
-        { id: "id", name: "no"},
-        { id: "name", name: "name"},
-        { id: "comment", name: "description"},
-        { id: "type", name: "type"},
-        { id: "size", name: "size(KB)"},
-        { id: "date_uploaded", name: "date uploaded"},
-    ];
+        { id: "id", name: "no" },
+        { id: "title", name: "title" },
+        { id: "department", name: "department" },
+        { id: "status", name: "status" }
+    ]
 
     function renderTableHeader() {
+
         return (
             <thead>
                 <tr>
                     {header.map((item, index) => {
-                        return <th key={index}>{item.name}<i id={item.id} className="fa fa-sort" onClick={handleSort}></i></th>
+                        return (
+                            <th key={index}>
+                                <span>{item.name}</span>
+                                <i id={item.id} className="fa fa-sort" onClick={handleSort}></i>
+                            </th>
+                        )
                     })}
-                    <th className="text-center">Action</th>
+                    {canEdit && <th className="text-center">action</th>}
                 </tr>
             </thead>
         )
@@ -139,27 +133,27 @@ export default function MyFile() {
         return (
             <tbody>
                 {data.length > 0 ? data.map((item, index) => {
-                
-                const { id, name, description ,type, size, path ,date_uploaded } = item;
-                return (
-                    index < entry &&
-                        <tr key={id}>
+
+                    const { id, title, department, is_vacant } = item;
+
+                    return (
+                        <tr key={index}>
                             <td>{index+=1}</td>
-                            <td>{name}</td>
-                            <td>{description}</td>
-                            <td>{type}</td>
-                            <td>{(size / 1000000) + " MB"}</td>
-                            <td>{date_uploaded}</td>
-                            <td className="text-center">
-                                <DownloadButton toDownload={path} />
-                                <PreviewButton to={path} />
-                                <DeleteButton from="my-files" id={id} name={name} onCancel={()=> fetchData(endpoint)} />
+                            <td>{title}</td>
+                            <td>{department.name}</td>
+                            <td>
+                                { is_vacant ? <span className="text-success">Hiring</span> : 
+                                <span className="text-danger">No Hiring</span> }
                             </td>
+                            <td><EditButton to={EDIT_POSITION + id +"/"} /></td>
+                            {canEdit && <td className="text-center">
+                                
+                            </td>}
                         </tr>
-                )
-            }) : <tr className="text-center text-secondary"><td colSpan={header.length + 1}>No data to show...</td></tr> } 
+                    )
+                }) : <tr className="text-center text-secondary"><td colSpan={header.length}>No data to show...</td></tr> } 
             </tbody>
-        )       
+        )
     }
 
     function renderTable() {
@@ -185,11 +179,6 @@ export default function MyFile() {
         )
     }
 
-
-
-    if (isUpload) {
-        return display && <UploadFile to={"my-files"}  onCancel={() => setUpload(false)} />
-    }
 
     return (
         display &&

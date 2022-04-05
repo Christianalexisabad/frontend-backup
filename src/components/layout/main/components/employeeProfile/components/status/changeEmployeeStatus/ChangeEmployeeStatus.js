@@ -17,7 +17,7 @@ const ChangeEmployeeStatus = (props) => {
     // const history = useHistory();
     const modified_by = getEmployeeID();
 
-    const initialValues = {
+    const initialData = {
         status: props.status,
         employee: props.employee,
         reason: "",
@@ -25,7 +25,7 @@ const ChangeEmployeeStatus = (props) => {
         effective_date: getCurrentDate(),
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     
@@ -194,7 +194,7 @@ const ChangeEmployeeStatus = (props) => {
                                         <br />
                                         <CancelButton text="Cancel" onClick={() => {
                                             setMessage("");
-                                            setData(initialValues);
+                                            setData(initialData);
                                             props.onClose();
                                         }}/>
                                         <SubmitButton text="Save" /> 

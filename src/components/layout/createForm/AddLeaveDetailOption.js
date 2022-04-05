@@ -22,12 +22,12 @@ const AddLeaveDetailOption = () => {
     const display = isPath(ADD_LEAVE_DETAIL_OPTION);
     const history = useHistory();
     
-    const initialValues = {
+    const initialData = {
         name: "",
         leave_type: null,
     };
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -68,7 +68,7 @@ const AddLeaveDetailOption = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -107,7 +107,7 @@ const AddLeaveDetailOption = () => {
                                     text="Leave Application"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -145,7 +145,7 @@ const AddLeaveDetailOption = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

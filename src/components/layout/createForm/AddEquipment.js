@@ -21,7 +21,7 @@ const AddEquipment = () => {
     const display = isPath(ADD_EQUIPMENT);
     const HOST = getHost();
 
-    const initialValues = {
+    const initialData = {
         image: {},
         imageURL: HOST + "/media/images/office/default.jpg",
         type: "",
@@ -36,7 +36,7 @@ const AddEquipment = () => {
     }
 
     const history = useHistory();
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [Articles, setArticles] = useState([]);
@@ -108,7 +108,7 @@ const AddEquipment = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -191,7 +191,7 @@ const AddEquipment = () => {
                                     text="Add Equipment"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -298,7 +298,7 @@ const AddEquipment = () => {
                                             onClick={handleClearInput}
                                         />
                                     <div className="btnContainer">
-                                        <CancelButton text="Clear" onClick={()=> setData(initialValues)} />
+                                        <CancelButton text="Clear" onClick={()=> setData(initialData)} />
                                         <SubmitButton text={isSuccess ? "New" : "Save"}/>
                                     </div>
                                 </form>  

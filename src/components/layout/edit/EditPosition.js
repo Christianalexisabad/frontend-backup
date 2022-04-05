@@ -1,12 +1,10 @@
-import ImageUploader from "../../forms/imageUploader/ImageUploader";
-import { isEmail, isTelNo, isName, hasIllegalCharacters } from "../../../utility/Regex";
+import { hasIllegalCharacters, isName } from "../../../utility/Regex";
 import CancelButton from "../../forms/cancelButton/CancelButton";
 import SubmitButton from "../../forms/submitButton/SubmitButton";
-import { getData, getDateTime, isPath, Name, pathContains } from "../../../utility/Functions";
-import BackButton from "../../forms/backButton/BackButton";
+import { getData, hasChanges, isDataChanged, pathContains } from "../../../utility/Functions";
 import DialogBox from "../../forms/dialogBox/DialogBox";
 import { getHost } from "../../../utility/APIService";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Select from "../../forms/select/Select";
 import { useHistory, useParams } from "react-router-dom";
 import Input from "../../forms/input/Input";
@@ -18,33 +16,35 @@ import { ADD_DEPARTMENT, ADD_SALARY, EDIT_POSITION } from "../../../utility/Rout
 const EditPosition = () => {
 
     const { id } = useParams();
-    const display = pathContains(EDIT_POSITION);
+    const display = pathContains(EDIT_POSITION) && id ? true : false;
     const history = useHistory();
 
     const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
     const [amount, setAmount] = useState(0);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
-
+    const [Salaries, setSalaries] = useState({});
     const [Departments, setDepartments] = useState({});
+
     const fetchDepartments = async () => {
-        let response = await axios.get(getHost() + "/api/departments/");
-        let { data } = response.data;
+        const response = await axios.get(getHost() + "/api/departments/");
+        const { data } = response.data;
         setDepartments(data);
     }
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         const response = await axios.get(getHost() + "/api/positions/get/"+ id + "/");
         let { data } = await response.data;
         data['position'] = data['title'];
         data['department'] = data['department']['id'];
         data['salary'] = data['salary']['id'];
         setData(data);
-    }
-
-    const [Salaries, setSalaries] = useState({});
+        setInitialData(data);
+    }, [ id ])
+    
     const fetchSalaries = async () => {
-        let response = await axios.get(getHost() + "/api/salaries/");
+        const response = await axios.get(getHost() + "/api/salaries/");
         let { data } = response.data;
         setSalaries(data);
     }
@@ -55,7 +55,7 @@ const EditPosition = () => {
             fetchDepartments();
             fetchSalaries();
         }   
-    }, [display]);
+    }, [ display, fetchData ]);
 
     const {
         position,
@@ -69,8 +69,47 @@ const EditPosition = () => {
     }
 
     useEffect(() => {
-        setAmount(salary ? getData(parseInt(salary), 'amount', Salaries)  : 0)
-    }, [salary]);
+        if (salary) {
+            setAmount(getData(parseInt(salary), 'amount', Salaries))
+        }
+    }, [salary, Salaries]);
+
+     // error message
+    const [err, setErr] = useState({});
+
+    useEffect(() => {
+
+        let error = !position ? "Required" : "";
+
+        if (position && !isName(position)) {
+            error = "Contains invalid characters."
+        }
+
+        if (error !== err.position) {
+            setErr({ ...err, position: error });
+        }
+
+    }, [ err, err.position, position ]);
+
+    useEffect(() => {
+
+        let error = !department ? "Required" : "";
+
+        if (error !== err.department) {
+            setErr({ ...err, department: error });
+        }
+
+    }, [ err, err.department, department ]);
+
+    useEffect(() => {
+
+        let error = !salary ? "Required" : "";
+
+        if (error !== err.salary) {
+            setErr({ ...err, salary: error });
+        }
+
+    }, [ err, err.salary, salary ]);
 
     const handleSubmit = (e) => { 
         e.preventDefault();  
@@ -137,6 +176,7 @@ const EditPosition = () => {
                                         onClose={() => setMessage("")}
                                     />
                                     <Input 
+                                        errMessage={err.position}
                                         id="position"
                                         label="Position" 
                                         type="text" 
@@ -144,6 +184,7 @@ const EditPosition = () => {
                                         onChange={handleInputChange} 
                                     />
                                     <Select 
+                                        errMessage={err.department}
                                         id="department" 
                                         label="department" 
                                         value={department} 
@@ -154,6 +195,7 @@ const EditPosition = () => {
                                         onChange={handleInputChange} 
                                     />
                                     <Select 
+                                        errMessage={err.salary}
                                         id="salary" 
                                         label="salary" 
                                         value={salary} 
@@ -170,15 +212,21 @@ const EditPosition = () => {
                                         disabled={true}
                                     /> 
                                     <div className="btnContainer">
-                                        <CancelButton 
-                                            text="Reset" 
-                                            isSuccess={isSuccess} 
-                                            onClick={()=> {
-                                                setMessage("");
-                                                fetchData();
-                                            }}
-                                        />
-                                        <SubmitButton text={isSuccess ? "Ok" : "Save"} /> 
+                                        {!isSuccess &&
+                                            <CancelButton
+                                                display={isDataChanged(initialData, data)} 
+                                                text="Reset" 
+                                                isSuccess={isSuccess} 
+                                                onClick={()=> {
+                                                    setMessage("");
+                                                    setData(initialData);
+                                                }}
+                                            />
+                                        }
+                                        <SubmitButton 
+                                            text={isSuccess ? "Ok" : "Save"} 
+                                            disabled={hasChanges(err) || !isDataChanged(initialData, data)}
+                                        /> 
                                     </div>
                                 </form>
                             </div>

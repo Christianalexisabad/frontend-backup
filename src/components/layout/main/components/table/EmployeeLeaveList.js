@@ -18,7 +18,7 @@ import LeaveFilter from "../../../../forms/leaveFilter/LeaveFilter";
 import PrintButton from "../../../../forms/printButton/PrintButton";
 import TableFooter from "./components/TableFooter";
 
-const initialValues = {
+const initialData = {
     filterValue: null, 
     department: null, 
     employee: null,  
@@ -59,11 +59,13 @@ export default function EmployeeLeaveList(props) {
         setLeaveBalances(data); 
     }
 
-    const [filterData, setFilterData] = useState(initialValues);
-    const handleFilterChange = (e) => {
-        e.preventDefault();
-        setFilterData({ ...filterData, [e.target.id]: e.target.value })
+    const [filterData, setFilterData] = useState(initialData);
+    
+    const handleFilterChange = (event) => {
+        event.preventDefault();
+        setFilterData({ ...filterData, [event.target.id]: event.target.value })
     }
+
     let { department, employee, status, startDate, endDate } = filterData;
 
     useEffect(() => {
@@ -96,7 +98,6 @@ export default function EmployeeLeaveList(props) {
                     startDate && endDate && order ? "/application_date_range=" + application_date_range + "/order=" + order + "/":
                     startDate && endDate ? "/application_date_range=" + application_date_range + "/" :
                     order ? "order=" + order + "/" : "";   
-        alert(newPath ? defaultPath + newPath : defaultPath)
         setPath(newPath ? defaultPath + newPath : defaultPath);
 
     }, [ department, employee, startDate, endDate, status, order, defaultPath ]);
@@ -112,21 +113,21 @@ export default function EmployeeLeaveList(props) {
         path && fetchData();
     }, [path]);
 
-    const handleSearchBarChange = (e) => {
-        e.preventDefault();
-        setSearchTerm(e.target.value);
+    const handleSearchBarChange = (event) => {
+        event.preventDefault();
+        setSearchTerm(event.target.value);
     }
 
-    const handleEntry = (e) => {
-        e.preventDefault();
-        setEntry(parseInt(e.target.value));
+    const handleEntry = (event) => {
+        event.preventDefault();
+        setEntry(parseInt(event.target.value));
     }   
 
-     const handleSort = (e) => {
-        e.preventDefault();
-        let id = e.target.id;
+     const handleSort = (event) => {
+        event.preventDefault();
+        let id = event.target.id;
         let order = id.startsWith("-") ? id.replace("-", "") : "-" + id;
-        e.target.id = order;
+        event.target.id = order;
         setOrder(order);
     }
 
@@ -194,7 +195,7 @@ export default function EmployeeLeaveList(props) {
                         <LeaveFilter 
                             data={filterData}
                             onChange={handleFilterChange}
-                            onClear={()=> setFilterData(initialValues)}                                
+                            onClear={()=> setFilterData(initialData)}                                
                         />
                     </div>
                 </div>

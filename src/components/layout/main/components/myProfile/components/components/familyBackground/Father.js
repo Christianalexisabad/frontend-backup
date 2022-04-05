@@ -17,6 +17,7 @@ export default function Father(props){
     const [isSuccess, setSuccess] = useState(false);
     const [data, setData] = useState([]);
 
+
     const fetchData = async () => {
         try {
             const response = await axios.get(getHost() + "/api/fathers/get/" + getEmployeeID() + "/");
@@ -50,77 +51,82 @@ export default function Father(props){
         setSuccess(true);
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        fetchData();
+        setMessage("");
+        setEditable(false);
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="row">
-                <div className="col-lg-12">
-                    <h1 className="text-secondary">
-                        <span>Father </span>
-                        <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
-                    </h1>
-                    <DialogBox
-                        message={ message } 
-                        isSuccess={ isSuccess }
-                    />
-                    <Button 
-                        text="edit"
-                        display={!isEditable}
-                        onClick={() => setEditable(true)} 
-                    />
-                    <CancelButton 
-                        text="cancel" 
-                        display={isEditable}
-                        onClick={() => {
-                            fetchData();
-                            setMessage("");
-                            setEditable(false);
-                        }} 
-                    />
-                    <SubmitButton 
-                        text={isSuccess ? "Ok" : "Save"}
-                        display={isEditable} 
-                    />
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <h1 className="text-secondary">
+                            <span>Father </span>
+                            <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
+                        </h1>
+                        <DialogBox
+                            message={ message } 
+                            isSuccess={ isSuccess }
+                        />
+                        <Button 
+                            text="edit"
+                            display={!isEditable}
+                            onClick={() => setEditable(true)} 
+                        />
+                        <CancelButton 
+                            text="cancel" 
+                            display={isEditable}
+                            onClick={handleCancel} 
+                        />
+                        <SubmitButton 
+                            text={isSuccess ? "Ok" : "Save"}
+                            display={isEditable} 
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-lg-12">
-                    <Input  
-                        label="surname"
-                        type="text" 
-                        id="sur_name" 
-                        value={sur_name} 
-                        disabled={disabled}
-                        placeholder="Surname" 
-                        onChange={handleInputChange} 
-                    />
-                    <Input  
-                        label="first name"
-                        type="text" 
-                        id="first_name" 
-                        value={first_name} 
-                        disabled={disabled}
-                        placeholder="First Name" 
-                        onChange={handleInputChange} 
-                    />
-                    <Input  
-                        label="middle name"
-                        type="text" 
-                        id="middle name" 
-                        value={middle_name} 
-                        disabled={disabled}
-                        placeholder="Middle Name" 
-                        onChange={handleInputChange} 
-                    />
-                    <Select 
-                        label="name extension" 
-                        id="name_extension" 
-                        value={name_extension}  
-                        options={NameExtensions} 
-                        disabled={disabled}
-                        onChange={handleInputChange} 
-                    />
-                </div>        
-            </div>
-        </form>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <Input  
+                            label="surname"
+                            type="text" 
+                            id="sur_name" 
+                            value={sur_name} 
+                            disabled={disabled}
+                            placeholder="Surname" 
+                            onChange={handleInputChange} 
+                        />
+                        <Input  
+                            label="first name"
+                            type="text" 
+                            id="first_name" 
+                            value={first_name} 
+                            disabled={disabled}
+                            placeholder="First Name" 
+                            onChange={handleInputChange} 
+                        />
+                        <Input  
+                            label="middle name"
+                            type="text" 
+                            id="middle name" 
+                            value={middle_name} 
+                            disabled={disabled}
+                            placeholder="Middle Name" 
+                            onChange={handleInputChange} 
+                        />
+                        <Select 
+                            label="name extension" 
+                            id="name_extension" 
+                            value={name_extension}  
+                            options={NameExtensions} 
+                            disabled={disabled}
+                            onChange={handleInputChange} 
+                        />
+                    </div>        
+                </div>
+            </form>
+        </div>
     )   
 }

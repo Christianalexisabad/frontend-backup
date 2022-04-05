@@ -8,12 +8,14 @@ import SubmitButton from "../../../../../../../forms/submitButton/SubmitButton";
 import CancelButton from "../../../../../../../forms/cancelButton/CancelButton";
 import Button from "../../../../../../../forms/button/Button";
 import { getEmployeeID } from "../../../../../../../../utility/Session";
+import { isDataChanged, isEmpty } from "../../../../../../../../utility/Functions";
 
-export default function Residential(){
+export default function Residential({ component }){
 
     const HOST = getHost();
     const employee = getEmployeeID();
     const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
 
     const [isEditable, setEditable] = useState(false);
     const [message, setMessage] = useState("");
@@ -30,6 +32,7 @@ export default function Residential(){
             const response = await axios.get(getHost() + "/api/residential-address/"+ employee +"/");
             const { data } = await response.data;
             setData(data);
+            setInitialData(data);
         } catch (error) {
             // console.log(error)
         }
@@ -135,30 +138,43 @@ export default function Residential(){
         }
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        if (!dataChanged) {
+            setMessage("");
+            setEditable(false);
+        }
+        setData(initialData);
+    }
+
+    const dataChanged = isDataChanged(initialData, data);
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col-lg-12">
-                    <h1 className="text-secondary">
+                   <h1 className="text-secondary">
                         <span>Residential Address </span>
-                        <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
+                        <Button 
+                            icon="fa fa-refresh" 
+                            onClick={()=>fetchData()}
+                        />
                     </h1>
-                    <Button 
-                        text="edit"
-                        display={!isEditable}
-                        onClick={() => setEditable(true)} 
-                    />
+                    { !isEditable &&
+                        <Button 
+                            text="edit"
+                            display={!isSuccess}
+                            onClick={() => setEditable(true)} 
+                        />
+                    }
                     <CancelButton 
-                        text="cancel" 
-                        display={isEditable}
-                        onClick={() => {
-                            fetchData();
-                            setMessage("");
-                            setEditable(false);
-                        }} 
+                        text={isEmpty(data) || (id && !dataChanged) ? 'Cancel' : 'Reset'}
+                        display={isEditable && !isSuccess}
+                        onClick={handleCancel} 
                     />
                     <SubmitButton 
                         text={isSuccess ? "Ok" : "Save"}
+                        disabled={isEmpty(data) || (id && !dataChanged)}
                         display={isEditable} 
                     />
                 </div>
@@ -171,7 +187,6 @@ export default function Residential(){
                         onClose={() => setMessage("")}
                     />
                     <Input 
-                        required
                         label="House/Block/Lot No"
                         type="text" 
                         id="house_blk_lot_no" 
@@ -190,7 +205,6 @@ export default function Residential(){
                         onChange={handleInputChange} 
                     />
                     <Input 
-                        required
                         label="Subd/Village"
                         type="text" 
                         id="subd_village" 
@@ -200,7 +214,6 @@ export default function Residential(){
                         onChange={handleInputChange} 
                     />
                     <Select 
-                        required
                         label="Barangay" 
                         id="barangay" 
                         value={barangay} 
@@ -209,7 +222,6 @@ export default function Residential(){
                         onChange={handleInputChange} 
                     />
                     <Select 
-                        required
                         label="City" 
                         id="city" 
                         value={city}  
@@ -218,7 +230,6 @@ export default function Residential(){
                         onChange={handleInputChange} 
                     />
                     <Select 
-                        required
                         label="Province" 
                         id="province" 
                         value={province}  
@@ -227,7 +238,6 @@ export default function Residential(){
                         onChange={handleInputChange} 
                     />
                     <Select 
-                        required
                         label="Country" 
                         id="country" 
                         value={country}  

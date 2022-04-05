@@ -18,12 +18,12 @@ const AddMeasurementUnit = () => {
     const display = isPath("/pages/inventory%20settings/measurement%20units/new/");
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         name: "",
         description: ""
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -36,7 +36,7 @@ const AddMeasurementUnit = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -77,7 +77,7 @@ const AddMeasurementUnit = () => {
                                     text="Add Measurement Unit"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -117,7 +117,7 @@ const AddMeasurementUnit = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

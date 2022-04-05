@@ -18,11 +18,11 @@ const AddOfficeSupplyType = () => {
     const display = isPath(ADD_OFFICE_SUPPLY_TYPE);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         name: "",
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -37,7 +37,7 @@ const AddOfficeSupplyType = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -81,7 +81,7 @@ const AddOfficeSupplyType = () => {
                                     text="Add New Type"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -111,7 +111,7 @@ const AddOfficeSupplyType = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text={isSuccess ? "New" : "Save"} /> 

@@ -7,6 +7,7 @@ import Button from "../../../../../forms/button/Button";
 import CancelButton from "../../../../../forms/cancelButton/CancelButton";
 import SubmitButton from "../../../../../forms/submitButton/SubmitButton";
 import { useParams } from "react-router-dom";
+import { isDataChanged } from "../../../../../../utility/Functions";
 
 export default function ContactInfo(props){
 
@@ -15,6 +16,8 @@ export default function ContactInfo(props){
 
     const HOST = getHost();
     const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
+
     const [isEditable, setEditable] = useState(false);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
@@ -23,6 +26,7 @@ export default function ContactInfo(props){
         const response = await axios.get(HOST + "/api/employees/" + employee + "/contact-info/");
         const { data } = await response.data;
         setData(data);
+        setInitialData(data);
     }, [ HOST, employee ])
 
     useEffect(() => {
@@ -63,6 +67,15 @@ export default function ContactInfo(props){
         }
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        if (!isDataChanged(initialData, data)) {
+            setMessage("");
+            setEditable(false);
+        }
+        setData(initialData);
+    }
+
     return (
         display &&
         <form onSubmit={handleSubmit}>
@@ -81,11 +94,7 @@ export default function ContactInfo(props){
                     <CancelButton 
                         text="cancel" 
                         display={isEditable}
-                        onClick={() => {
-                            fetchData();
-                            setMessage("");
-                            setEditable(false);
-                        }} 
+                        onClick={handleCancel}
                     />
                     <SubmitButton 
                         text={isSuccess ? "Ok" : "Save"}

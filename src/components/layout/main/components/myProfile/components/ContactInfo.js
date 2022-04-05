@@ -8,6 +8,7 @@ import CancelButton from "../../../../../forms/cancelButton/CancelButton";
 import SubmitButton from "../../../../../forms/submitButton/SubmitButton";
 import { useParams } from "react-router-dom";
 import { getEmployeeID } from "../../../../../../utility/Session";
+import { isDataChanged } from "../../../../../../utility/Functions";
 
 export default function ContactInfo(){
 
@@ -16,6 +17,7 @@ export default function ContactInfo(){
 
     const HOST = getHost();
     const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
     const [isEditable, setEditable] = useState(false);
     const employee = getEmployeeID();
     const [message, setMessage] = useState("");
@@ -25,6 +27,7 @@ export default function ContactInfo(){
         const response = await axios.get(HOST + "/api/employees/" + employee + "/");
         const { data } = await response.data;
         setData(data);
+        setInitialData(data);
     }, [ HOST, employee ])
 
     useEffect(() => {
@@ -48,6 +51,7 @@ export default function ContactInfo(){
             setMessage("");
             setEditable(false);
             setSuccess(false);
+            fetchData();
         } else {
             axios.patch(HOST + "/api/employees/update/" + id + "/", {
                 mobile_no: mobile_no,
@@ -63,6 +67,15 @@ export default function ContactInfo(){
         }
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        if (!isDataChanged(initialData, data)) {
+            setMessage("");
+            setEditable(false);
+        }
+        setData(initialData);
+    }
+
     return (
         display &&
         <form onSubmit={handleSubmit}>
@@ -70,7 +83,10 @@ export default function ContactInfo(){
                 <div className="col-lg-12">
                     <h1 className="text-secondary">
                         <span>Contact Information </span>
-                        <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
+                        <Button 
+                            icon="fa fa-refresh" 
+                            onClick={()=>fetchData()}
+                        />
                     </h1>
                     { !isEditable &&
                         <Button 
@@ -80,16 +96,13 @@ export default function ContactInfo(){
                         />
                     }
                     <CancelButton 
-                        text="cancel" 
+                        text={!isDataChanged(initialData, data) ? 'Cancel' : 'Reset'}
                         display={isEditable && !isSuccess}
-                        onClick={() => {
-                            setMessage("");
-                            fetchData();
-                            setEditable(false);
-                        }} 
+                        onClick={handleCancel} 
                     />
                     <SubmitButton 
                         text={isSuccess ? "Ok" : "Save"}
+                        disabled={!isDataChanged(initialData, data)}
                         display={isEditable} 
                     />
                 </div>

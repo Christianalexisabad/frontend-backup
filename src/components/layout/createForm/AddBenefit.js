@@ -18,7 +18,7 @@ const AddBenefit = () => {
     const display = isPath(ADD_BENEFITS);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         id: "",
         salary: 0,
         benefit: null,
@@ -34,7 +34,7 @@ const AddBenefit = () => {
         employee_name: "",
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -92,7 +92,7 @@ const AddBenefit = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -187,7 +187,7 @@ const AddBenefit = () => {
                                     text="Add Benefit"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -267,7 +267,7 @@ const AddBenefit = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text={isSuccess ? "New" : "Save"} /> 

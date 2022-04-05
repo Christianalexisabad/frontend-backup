@@ -15,13 +15,13 @@ const CreateBloodType = (props) => {
 
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         name: "",
     }
 
     const display = isPath(ADD_BLOOD_TYPE);
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -36,7 +36,7 @@ const CreateBloodType = (props) => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -74,7 +74,7 @@ const CreateBloodType = (props) => {
                                     text="Add Blood Type"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -104,7 +104,7 @@ const CreateBloodType = (props) => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

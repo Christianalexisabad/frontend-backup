@@ -18,12 +18,12 @@ const AddDepartmentHead = () => {
     const display = isPath("/pages/department/department%20heads/new/");
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         department: 0,
         employee: 0,
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -77,7 +77,7 @@ const AddDepartmentHead = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -116,7 +116,7 @@ const AddDepartmentHead = () => {
                                     text="Create Department Head"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -155,7 +155,7 @@ const AddDepartmentHead = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

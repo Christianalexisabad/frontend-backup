@@ -22,7 +22,7 @@ const AddOfficeSupply = () => {
     const display = isPath(ADD_OFFICE_SUPPLY);
     const HOST = getHost();
 
-    const initialValues = {
+    const initialData = {
         image: {},
         imageURL: HOST + "/media/images/office/default.jpg",
         type: "",
@@ -39,7 +39,7 @@ const AddOfficeSupply = () => {
     }
 
     const history = useHistory();
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [Articles, setArticles] = useState([]);
     const [stockNo, setStockNo] = useState(null);
@@ -137,7 +137,7 @@ const AddOfficeSupply = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         fetchStockNo();
         setSuccess(false);
     }   
@@ -263,7 +263,7 @@ const AddOfficeSupply = () => {
                                     text="Add New Stock"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -380,7 +380,7 @@ const AddOfficeSupply = () => {
                                             onClick={handleClearInput}
                                         />
                                     <div className="btnContainer">
-                                        <CancelButton text="Clear" onClick={()=> setData(initialValues)} />
+                                        <CancelButton text="Clear" onClick={()=> setData(initialData)} />
                                         <SubmitButton text={isSuccess ? "New" : "Save"}/>
                                     </div>
                                 </form>  

@@ -35,8 +35,8 @@ export default function EmployeeAttendance() {
     }, [ HOST ]);
 
     useEffect(() => {
-        fetchAttendanceStatuses();
-    }, [ fetchAttendanceStatuses ])
+       display && fetchAttendanceStatuses();
+    }, [ display, fetchAttendanceStatuses ])
 
     const fetchData = useCallback(async (defaultPath) => {
         const response = await axios.get(HOST + "/api/" + defaultPath)
@@ -45,7 +45,7 @@ export default function EmployeeAttendance() {
         setData(data);
     }, [ HOST ]);
 
-    const initialValues = {
+    const initialData = {
         filterValue: "", 
         department: "", 
         employee: "", 
@@ -54,7 +54,7 @@ export default function EmployeeAttendance() {
         endDate: "",
     }
     
-    const [filterData, setFilterData] = useState(initialValues);
+    const [filterData, setFilterData] = useState(initialData);
     const handleFilterChange = (e) => {
         e.preventDefault();
         setFilterData({ ...filterData, [e.target.id]: e.target.value })
@@ -170,7 +170,7 @@ export default function EmployeeAttendance() {
                         <AttendanceFilter 
                             data={filterData}
                             onChange={handleFilterChange}
-                            onClear={()=> setFilterData(initialValues)}
+                            onClear={()=> setFilterData(initialData)}
                         />
                     </div>
                 </div>

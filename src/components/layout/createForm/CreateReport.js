@@ -17,7 +17,7 @@ const CreateReport = (props) => {
 
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         report_type: null,
         start_date: "",
         end_date: "",
@@ -102,7 +102,7 @@ const CreateReport = (props) => {
                                     text="Generate Report"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -155,7 +155,7 @@ const CreateReport = (props) => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Create" disabled={data.length === 0 ? true : false} /> 

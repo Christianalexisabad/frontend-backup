@@ -17,7 +17,7 @@ import EmployeeFilter from "../../../../forms/employeeFilter/EmployeeFilter";
 import PrintButton from "../../../../forms/printButton/PrintButton";
 import TableFooter from "./components/TableFooter";
 
-const initialValues = {
+const initialData = {
     filterValue: "", 
     department: "", 
     employee_type: "",
@@ -66,7 +66,7 @@ export default function EmployeeList() {
     const canEdit = hasPermission("can_edit_employee");
     const canDelete = hasPermission("can_delete_employee");
 
-    const [filterData, setFilterData] = useState(initialValues);
+    const [filterData, setFilterData] = useState(initialData);
 
     const handleFilterChange = (e) => {
         e.preventDefault();
@@ -130,7 +130,7 @@ export default function EmployeeList() {
                 sex ? "sex=" + sex + "/" :
                 startDate && endDate ? "date_hired_range=" + date_hired_range + "/" : "";
         } else {
-            setFilterData(initialValues)
+            setFilterData(initialData)
             newPath = "search=" + searchTerm + "/";
         }
 
@@ -200,7 +200,7 @@ export default function EmployeeList() {
                                 type="button"
                                 icon="fa fa-refresh"
                                 onClick={()=> {
-                                    setFilterData(initialValues);
+                                    setFilterData(initialData);
                                 }}
                             />
                         </div>
@@ -236,7 +236,7 @@ export default function EmployeeList() {
                         <EmployeeFilter 
                             data={filterData}
                             onChange={handleFilterChange}
-                            onCancel={()=> setFilterData(initialValues)}                                
+                            onCancel={()=> setFilterData(initialData)}                                
                         />
                     </div>
                 </div>

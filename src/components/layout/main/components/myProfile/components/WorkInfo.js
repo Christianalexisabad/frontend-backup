@@ -37,7 +37,7 @@ export default function WorkInfo(){
         data['positionTitle'] = position.title;
         data['payGrade'] = position.salary.pay_grade;
         data['department'] = department.id;
-        data['departmentHead'] = department_head_id;
+        data['departmentHead'] = department_head_id === 0 ? null : department_head_id;
         data['salary'] = position.salary.id;
 
         setData(data);

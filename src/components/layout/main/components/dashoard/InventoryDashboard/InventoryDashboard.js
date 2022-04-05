@@ -27,8 +27,8 @@ const InventoryDashboard = () => {
     }
 
     useEffect(() =>{
-        fetchData();
-    }, []);
+        display && fetchData();
+    }, [ display ]);
 
     const renderCard =() => {
 

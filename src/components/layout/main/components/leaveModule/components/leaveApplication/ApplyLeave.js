@@ -14,7 +14,7 @@ import { getEmployeeID } from "../../../../../../../utility/Session";
 import { getAddedDate, getCurrentDate } from "../../../../../../../utility/DateTime";
 import { APPLY_LEAVE } from "../../../../../../../utility/Route";
 
-const initialValues = {
+const initialData = {
     leave_type: "",
     other_details: "",
     days_applied: "",
@@ -29,7 +29,7 @@ const ApplyLeave = () => {
     const history = useHistory();
     const employee = getEmployeeID();
     const currentDate = getCurrentDate();  
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -99,7 +99,7 @@ const ApplyLeave = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 
@@ -167,7 +167,7 @@ const ApplyLeave = () => {
                                 <Title 
                                     text="Leave Application"
                                     onClick={() => {
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -236,7 +236,7 @@ const ApplyLeave = () => {
                                             text="Clear" 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />}
                                         <SubmitButton text={isSuccess ? "New" : "Submit"} /> 

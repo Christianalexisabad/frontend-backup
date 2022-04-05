@@ -13,6 +13,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { getEmployeeID } from "../../../../../../utility/Session";
 import { useParams } from "react-router-dom";
+import { isDataChanged } from "../../../../../../utility/Functions";
 
 export default function BasicInfo(){
 
@@ -20,6 +21,7 @@ export default function BasicInfo(){
     const display = tab === "basic information" ? true : false;
 
     const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
     const employee = getEmployeeID();
     const [message, setMessage] = useState("");
     const [isEditable, setEditable] = useState(false);
@@ -35,6 +37,7 @@ export default function BasicInfo(){
         let newData = data;
         newData['imageURL'] = HOST + data.image;
         setData(newData);
+        setInitialData(newData);
 
     }, [ HOST, employee ])
 
@@ -63,7 +66,7 @@ export default function BasicInfo(){
     }, [ display, fetchData ])
 
     const handleInputChange = (e) => {
-        let { id, type, files, value } = e.target;
+        const { id, type, files, value } = e.target;
 
         if (type === "file") {
             setData({...data, [id]: files[0], imageURL: URL.createObjectURL(files[0])});
@@ -73,15 +76,10 @@ export default function BasicInfo(){
 
     }
 
-    const handleClearInput = (e) => {
-        setData({ ...data, [e.target.id]: "" })
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
-        if (isEditable) {
+        if (!isSuccess) {
             if (!sur_name) {
                 setMessage("Surname is required."); 
                 setSuccess(false);
@@ -140,7 +138,6 @@ export default function BasicInfo(){
             .then(res => {
                 setMessage(res.data.message);
                 setSuccess(true);
-                setEditable(false);
             }).catch(err => {
                 setMessage(err.response.data.message);
                 setSuccess(false);
@@ -148,8 +145,29 @@ export default function BasicInfo(){
 
         } else {
             setMessage();
-            setEditable(true);
+            setEditable(false);
+            setSuccess(false);
+            fetchData();
         }
+    }
+
+    const handleCancel = (event) => {
+        event.preventDefault();
+        if (!isDataChanged(initialData, data)) {
+            setMessage("");
+            setEditable(false);
+        }
+        setData(initialData);
+    }
+
+    const handleEdit = (event) => {
+        event.preventDefault();
+        setEditable(true);
+    }
+
+    const handleRefresh = (event) => {
+        event.preventDefault();
+        fetchData();
     }
 
     const styles = {
@@ -166,21 +184,27 @@ export default function BasicInfo(){
                     <div className="col-lg-12">
                         <h1 className="text-secondary">
                             <span>Basic Information </span>
-                            <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
-                        </h1>
-                        {!isEditable && <Button 
-                            text="edit"
-                            onClick={() => setEditable(true)} 
-                            permission="can_edit_employee"
-                        />}
+                            <Button 
+                                icon="fa fa-refresh" 
+                                onClick={handleRefresh}
+                            />
+                        </h1> 
+                        { !isEditable &&
+                            <Button 
+                                text="edit"
+                                display={!isSuccess}
+                                onClick={handleEdit} 
+                            />
+                        }
                         <CancelButton 
-                            text="cancel" 
-                            display={isEditable}
-                            onClick={() => setEditable(false)} 
+                            text={!isDataChanged(initialData, data) ? 'Cancel' : 'Reset'}
+                            display={isEditable && !isSuccess}
+                            onClick={handleCancel} 
                         />
                         <SubmitButton 
-                            text="Save" 
-                            display={isEditable}
+                            text={isSuccess ? "Ok" : "Save"}
+                            disabled={!isDataChanged(initialData, data)}
+                            display={isEditable} 
                         />
                     </div>
                 </div>
@@ -217,7 +241,6 @@ export default function BasicInfo(){
                                 placeholder="Surname" 
                                 isValid={isName(sur_name)}
                                 onChange={handleInputChange}
-                                onClear={handleClearInput}
                             />
                             <Input 
                                 required
@@ -230,7 +253,6 @@ export default function BasicInfo(){
                                 placeholder="First Name" 
                                 isValid={isName(first_name)}
                                 onChange={handleInputChange} 
-                                onClear={handleClearInput}
                             />
                             <Input 
                                 validate
@@ -242,7 +264,6 @@ export default function BasicInfo(){
                                 placeholder="Middle Name"
                                 isValid={isName(middle_name)}
                                 onChange={handleInputChange} 
-                                onClear={handleClearInput}
                             />
                             <Select 
                                 label="name extension" 
@@ -268,7 +289,6 @@ export default function BasicInfo(){
                                 disabled={disabled}
                                 placeholder="Middle Name" 
                                 onChange={handleInputChange} 
-                                onClear={handleClearInput}
                             />
                             <Input 
                                 label="place of birth" 
@@ -278,7 +298,6 @@ export default function BasicInfo(){
                                 placeholder="Place of Birth" 
                                 disabled={disabled}
                                 onChange={handleInputChange} 
-                                onClear={handleClearInput}
                             />
                             <Input 
                                 label="height"
@@ -288,7 +307,6 @@ export default function BasicInfo(){
                                 placeholder={"Value must be in centimeter(cm)"} 
                                 disabled={disabled}
                                 onChange={handleInputChange} 
-                                onClear={handleClearInput}
                             />
                             <Input 
                                 label="weight"
@@ -298,7 +316,6 @@ export default function BasicInfo(){
                                 placeholder={"Value must be in kilogram(kg)"}
                                 disabled={disabled}
                                 onChange={handleInputChange} 
-                                onClear={handleClearInput}
                             />
                             <Select 
                                 label="blood type"
@@ -308,7 +325,6 @@ export default function BasicInfo(){
                                 options={BloodTypes}
                                 disabled={disabled}
                                 onChange={handleInputChange} 
-                                onClear={handleClearInput}
                             />
                             <Input 
                                 label="citizenship"
@@ -318,7 +334,6 @@ export default function BasicInfo(){
                                 placeholder="citizenship" 
                                 disabled={disabled}
                                 onChange={handleInputChange} 
-                                onClear={handleClearInput}
                             />
                             <Input 
                                 label="date joined" 
@@ -326,7 +341,6 @@ export default function BasicInfo(){
                                 value={date_joined} 
                                 disabled={disabled}
                                 onChange={handleInputChange} 
-                                onClear={handleClearInput}
                             />
                         </div>
                     </div>

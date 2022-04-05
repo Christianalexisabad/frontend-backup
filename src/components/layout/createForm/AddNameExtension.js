@@ -17,11 +17,11 @@ const AddNameExtension = () => {
     const display = isPath(ADD_NAME_EXTENSION);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         name: "",
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -34,7 +34,7 @@ const AddNameExtension = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -81,7 +81,7 @@ const AddNameExtension = () => {
                                     text="Add Name Extension"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -112,7 +112,7 @@ const AddNameExtension = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

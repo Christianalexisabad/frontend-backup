@@ -71,11 +71,11 @@ const UserProfile = () => {
 
     useEffect(() => {
         if (display) {
-            setEdit(false);
-            fetchUserTypes();
-            fetchRoles();
-            fetchGroups();
-            fetchData();
+            // setEdit(false);
+            // fetchUserTypes();
+            // fetchRoles();
+            // fetchGroups();
+            // fetchData();
         }
     }, [ display, fetchData ]);
 

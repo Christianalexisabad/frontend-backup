@@ -23,13 +23,13 @@ export default function MyBenefits() {
       
     const [searchTerm, setSearchTerm] = useState("");
 
-    const initialValues = {
+    const initialData = {
         employee: employee,
         startDate: "",
         endDate: "",
     }
 
-    const [filterData, setFilterData] = useState(initialValues);
+    const [filterData, setFilterData] = useState(initialData);
     
     const handleFilterChange = (e) => {
         e.preventDefault();
@@ -128,7 +128,7 @@ export default function MyBenefits() {
                         <BenefitFilter 
                             data={filterData}
                             onChange={handleFilterChange}
-                            onClear={()=> setFilterData(initialValues)}                                
+                            onClear={()=> setFilterData(initialData)}                                
                         />
                     </div>
                 </div>

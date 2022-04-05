@@ -81,7 +81,7 @@ const EditOfficeSupplyType = () => {
                                     text="Edit Type"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />

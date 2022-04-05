@@ -16,6 +16,7 @@
 
 .select select:disabled{
     appearance: none;
+    padding-left: 4px;
 }
 
 .select label {

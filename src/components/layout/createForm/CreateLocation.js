@@ -17,7 +17,7 @@ const CreateLocation = (props) => {
     const history = useHistory();
     const display = isPath(CREATE_LOCATION)
 
-    const initialValues = {
+    const initialData = {
         blk_lot_no: "",
         street: "",
         subd_village: "",
@@ -27,7 +27,7 @@ const CreateLocation = (props) => {
         country: null,
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     
@@ -69,11 +69,13 @@ const CreateLocation = (props) => {
     }
 
     useEffect(() => {
-        fetchBarangays();
-        fetchCites();
-        fetchProvinces();
-        fetchCountries();
-    }, [])
+        if (display) {
+            fetchCites();
+            fetchBarangays();
+            fetchProvinces();
+            fetchCountries();
+        }
+    }, [ display ])
 
     const { 
         blk_lot_no,
@@ -126,7 +128,7 @@ const CreateLocation = (props) => {
                                     text="Create Location"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -212,7 +214,7 @@ const CreateLocation = (props) => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

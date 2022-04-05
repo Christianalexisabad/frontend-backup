@@ -20,12 +20,12 @@ const AddGroup = () => {
     const display = isPath(ADD_GROUP);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         name: "",
         role: null,
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [Roles, setRoles] = useState({});
@@ -49,7 +49,7 @@ const AddGroup = () => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -90,7 +90,7 @@ const AddGroup = () => {
                                     text="Add New Group"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -131,7 +131,7 @@ const AddGroup = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

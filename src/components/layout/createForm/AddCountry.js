@@ -17,12 +17,12 @@ const AddCountry = (props) => {
 
     const display = isPath(ADD_COUNTRY);
 
-    const initialValues = {
+    const initialData = {
         name: "",
     }
 
     const history = useHistory();
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -71,7 +71,7 @@ const AddCountry = (props) => {
                                     text="Add Country"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -101,7 +101,7 @@ const AddCountry = (props) => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

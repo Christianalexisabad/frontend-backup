@@ -12,13 +12,13 @@ import axios from "axios";
 import "./Table.css";
 import { GENERATE_REPORT, UPLOAD_REPORT } from "../../../../../utility/Route";
 import PreviewButton from "../../../../forms/previewButton/PreviewButton";
-import { getEmployeeID } from "../../../../../utility/Session";
+// import { getEmployeeID } from "../../../../../utility/Session";
 import TableFooter from "./components/TableFooter";
 
 export default function Report() {
 
     const display = isPath("/pages/reports/");
-    const employeeID = getEmployeeID();
+    // const employeeID = getEmployeeID();
     /* eslint-disable no-unused-vars */
     const [endpoint, setEndpoint] = useState(getHost() + "/api/reports/");
     const canViewEmployeeReport = hasPermission("can_view_employee_report");
@@ -63,13 +63,6 @@ export default function Report() {
         }
     /* eslint-disable react-hooks/exhaustive-deps */
     },[display])
-
-    useEffect(() => {
-        myReport ?
-        fetchData(getHost() + "/api/reports/" + employeeID + "/") : 
-        fetchData(getHost() + "/api/reports/")
-    /* eslint-disable react-hooks/exhaustive-deps */
-    }, [myReport])
 
     const handleSearchBarChange = (e) => {
         e.preventDefault();

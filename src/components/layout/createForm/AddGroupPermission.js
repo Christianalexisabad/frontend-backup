@@ -16,12 +16,12 @@ const AddGroupPermission = () => {
     const display = isPath(ADD_GROUP_PERMISSION);
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         group: "",
         permission: ""
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -92,7 +92,7 @@ const AddGroupPermission = () => {
                                     text="Add New Group Permission"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -132,7 +132,7 @@ const AddGroupPermission = () => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

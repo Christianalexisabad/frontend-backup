@@ -19,14 +19,14 @@ const CreateTask = () => {
     const history = useHistory();
     const display = isPath("/pages/self%20service/tasks/new/");
 
-    const initialValues = {
+    const initialData = {
         employee: "",
         task:"",
         start_date:"",
         end_date:"",
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
     const [employees, setEmployees] = useState([]);
@@ -85,7 +85,7 @@ const CreateTask = () => {
     function clearData () {
         setMessage("");
         setEmployeeName("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }   
 

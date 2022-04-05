@@ -18,11 +18,11 @@ const AddProvince = (props) => {
     const history = useHistory();
     const display = isPath(ADD_PROVINCE);
 
-    const initialValues = {
+    const initialData = {
         name: "",
     }
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -37,7 +37,7 @@ const AddProvince = (props) => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -77,7 +77,7 @@ const AddProvince = (props) => {
                                     text="Add Province"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -107,7 +107,7 @@ const AddProvince = (props) => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

@@ -8,12 +8,14 @@ import SubmitButton from "../../../../../../../forms/submitButton/SubmitButton";
 import CancelButton from "../../../../../../../forms/cancelButton/CancelButton";
 import Button from "../../../../../../../forms/button/Button";
 import { getEmployeeID } from "../../../../../../../../utility/Session";
+import { isDataChanged, isEmpty } from "../../../../../../../../utility/Functions";
 
-export default function Permanent({style}){
+export default function Permanent({ component }){
 
     const HOST = getHost();
     const employee = getEmployeeID();
     const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
 
     const [isEditable, setEditable] = useState(false);
     const [message, setMessage] = useState("");
@@ -29,6 +31,7 @@ export default function Permanent({style}){
         const response = await axios.get(getHost() + "/api/permanent-address/"+ employee +"/");
         const { data } = await response.data;
         setData(data);
+        setInitialData(data);
     }, [ employee ])
     
     const fetchBarangays = async () => {
@@ -89,11 +92,11 @@ export default function Permanent({style}){
             city: city,
             province: province,
             country: country,
-        }).then(res => {
-            setMessage(res.data.message);
+        }).then(response => {
+            setMessage(response.data.message);
             setSuccess(true);
-        }).catch(err => {
-            console.log(err)
+        }).catch(error => {
+            console.log(error)
         })
     }
 
@@ -106,11 +109,14 @@ export default function Permanent({style}){
             city: city,
             province: province,
             country: country,
-        }).then(res => {
-            setMessage(res.data.message);
+        }).then(response => {
+        
+            console.log(response);
+
+            setMessage(response.data.message);
             setSuccess(true);
-        }).catch(err => {
-            console.log(err)
+        }).catch(error => {
+            console.log(error)
         })
     }
 
@@ -119,7 +125,9 @@ export default function Permanent({style}){
 
         if (isSuccess) {
             setMessage("");
+            setEditable(false);
             setSuccess(false);
+            fetchData();
         } else {
             if (id) {
                 patchData();
@@ -129,30 +137,43 @@ export default function Permanent({style}){
         }
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        if (!dataChanged) {
+            setMessage("");
+            setEditable(false);
+        }
+        setData(initialData);
+    }
+
+    const dataChanged = isDataChanged(initialData, data);
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col-lg-12">
                     <h1 className="text-secondary">
                         <span>Permanent Address </span>
-                        <Button icon="fa fa-refresh" onClick={()=>fetchData()}/>
+                        <Button 
+                            icon="fa fa-refresh" 
+                            onClick={()=>fetchData()}
+                        />
                     </h1>
-                    <Button 
-                        text="edit"
-                        display={!isEditable}
-                        onClick={() => setEditable(true)} 
-                    />
+                    { !isEditable &&
+                        <Button 
+                            text="edit"
+                            display={!isSuccess}
+                            onClick={() => setEditable(true)} 
+                        />
+                    }
                     <CancelButton 
-                        text="cancel" 
-                        display={isEditable}
-                        onClick={() => {
-                            fetchData();
-                            setMessage("");
-                            setEditable(false);
-                        }} 
+                        text={isEmpty(data) || (id && !dataChanged) ? 'Cancel' : 'Reset'}
+                        display={isEditable && !isSuccess}
+                        onClick={handleCancel} 
                     />
                     <SubmitButton 
                         text={isSuccess ? "Ok" : "Save"}
+                        disabled={isEmpty(data) || (id && !dataChanged)}
                         display={isEditable} 
                     />
                 </div>

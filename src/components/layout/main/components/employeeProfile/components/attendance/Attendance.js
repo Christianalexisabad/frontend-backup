@@ -12,7 +12,7 @@ export default function Attendance(props){
     const [data, setData] = useState([]);
 
     const fetchData = useCallback(async () => {
-        const response = await axios.get(HOST + "/api/attendances/"+ employee +"/");
+        const response = await axios.get(HOST + "/api/attendances/employee="+ employee +"/");
         const { data } = await response.data;
         setData(data);
     }, [ HOST, employee ])
@@ -51,7 +51,8 @@ export default function Attendance(props){
     function renderTableBody() {
         return (
             <tbody>
-                { data.map((item, index) => {
+                { data.length > 0 ? 
+                    data.map((item, index) => {
 
                     const { date, am_in, am_out, am_remarks, pm_in, pm_out, pm_remarks } = item;
 
@@ -67,7 +68,14 @@ export default function Attendance(props){
                                 <td>{pm_remarks}</td>
                             </tr>
                         )
-                    })}
+                    })
+                    : 
+                    <tr>
+                        <td>
+                            No data to show.   
+                        </td>
+                    </tr>
+                }
             </tbody>
         )
     }

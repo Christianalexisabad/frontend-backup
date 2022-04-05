@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import Select from "../../../../../forms/select/Select";
 import { Name } from "../../../../../../utility/Functions";
 
-const initialValues = {
+const initialData = {
     id: null,
     department: null, 
     position: null, 
@@ -30,7 +30,7 @@ export default function WorkInfo(props){
     const HOST = getHost();
     const [isSuccess, setSuccess] = useState(false);
     const [isEditable, setEditable] = useState(false);
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
 
     const [Positions, setPositions] = useState([]);

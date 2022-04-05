@@ -15,13 +15,13 @@ const AddGovernmentCompany = (props) => {
 
     const history = useHistory();
 
-    const initialValues = {
+    const initialData = {
         name: "",
     }
 
     const display = isPath(ADD_GOVERNMENT_COMPANY);
     
-    const [data, setData] = useState(initialValues);
+    const [data, setData] = useState(initialData);
     const [message, setMessage] = useState("");
     const [isSuccess, setSuccess] = useState(false);
 
@@ -36,7 +36,7 @@ const AddGovernmentCompany = (props) => {
 
     function clearData () {
         setMessage("");
-        setData(initialValues);
+        setData(initialData);
         setSuccess(false);
     }
 
@@ -74,7 +74,7 @@ const AddGovernmentCompany = (props) => {
                                     text="Add New Company/Benefit"
                                     onClick={() => {
                                         setMessage("");
-                                        setData(initialValues);
+                                        setData(initialData);
                                         history.goBack();
                                     }}
                                 />
@@ -104,7 +104,7 @@ const AddGovernmentCompany = (props) => {
                                             isSuccess={isSuccess} 
                                             onClick={()=> {
                                                 setMessage("");
-                                                setData(initialValues);
+                                                setData(initialData);
                                             }}
                                         />
                                         <SubmitButton text="Save" /> 

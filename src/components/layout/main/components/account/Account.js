@@ -34,16 +34,12 @@ export default function Account() {
     }, [ HOST ])
 
     useEffect(() => {
-        !isEdit && fetchData();
-    }, [isEdit, fetchData ]);
-
-    useEffect(() => {
-        if (display) {
-            fetchData();
-        } else {
-            setEdit(false);
-            setMessage("");
-        }
+        // if (display) {
+        //     fetchData();
+        // } else {
+        //     setEdit(false);
+        //     setMessage("");
+        // }
     }, [ display, fetchData ]);
 
     const { id, imageURL, image, sur_name, first_name, username, email } = data;

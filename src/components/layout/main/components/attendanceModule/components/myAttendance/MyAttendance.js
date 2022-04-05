@@ -9,7 +9,7 @@ import Title from "../../../../../../forms/title/Title";
 import Button from "../../../../../../forms/button/Button";
 import axios from "axios";
 import "./MyAttendance.css";
-import { getCurrentDate, getCurrentTime, isTimeGreaterThanOrEqual, isTimeLessThan, isTimeLessThanOrEqual, isTimeRange } from "../../../../../../../utility/DateTime";
+import { getCurrentDate, isTimeGreaterThanOrEqual, isTimeLessThan, isTimeLessThanOrEqual, isTimeRange } from "../../../../../../../utility/DateTime";
 import { getEmployeeID } from "../../../../../../../utility/Session";
 import SubmitButton from "../../../../../../forms/submitButton/SubmitButton";
 import AlertMessage from "../../../../../../forms/alert/AlertMessage";
@@ -69,13 +69,13 @@ export default function MyAttendance(props) {
         fetchSettings();
     }, [ fetchAttendance, fetchSettings ]);
 
-    const initialValues = {
+    const initialData = {
         filterValue: 3, 
         status: "",
         startDate: currentDate, 
         endDate: currentDate,
     }
-    const [filterData, setFilterData] = useState(initialValues);
+    const [filterData, setFilterData] = useState(initialData);
 
     const handleFilterChange = (e) => {
         e.preventDefault();
@@ -385,7 +385,7 @@ export default function MyAttendance(props) {
                         <AttendanceFilter 
                             data={filterData}
                             onChange={handleFilterChange}
-                            onClear={()=> setFilterData(initialValues)}                                
+                            onClear={()=> setFilterData(initialData)}                                
                         />
                     </div>
                 </div>
